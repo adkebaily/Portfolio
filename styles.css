@@ -341,3 +341,14 @@ h3 { font-size: 1.05rem; margin: 0; font-weight: 700; letter-spacing: -.01em; }
   .chip-1 { left: -18%; }
   .chip-2 { right: -20%; }
 }
+
+/* ---------- Language switch ---------- */
+.lang-switch {
+  display: flex; align-items: center; height: 38px; padding: 3px; gap: 2px;
+  border: 1px solid var(--border); border-radius: 10px; background: var(--surface);
+  font-size: .8rem; font-weight: 700;
+}
+.lang-switch a, .lang-switch span { padding: 5px 9px; border-radius: 7px; line-height: 1; }
+.lang-switch a { color: var(--muted); }
+.lang-switch a:hover { color: var(--text); }
+.lang-switch .on { background: var(--accent-soft); color: var(--accent); }

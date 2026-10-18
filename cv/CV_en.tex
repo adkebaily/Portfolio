@@ -1,0 +1,107 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[scale=0.92]{geometry}
+\usepackage{parskip}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{graphicx}
+\usepackage[unicode,hidelinks]{hyperref}
+\usepackage{fontawesome5}
+
+\definecolor{linkcolour}{RGB}{0,80,158}
+\hypersetup{colorlinks=true,urlcolor=linkcolour,linkcolor=linkcolour}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\titleformat{\section}{\large\bfseries\raggedright}{}{0em}{}[\titlerule]
+\titlespacing{\section}{0pt}{6pt}{4pt}
+\setlength{\parindent}{0pt}
+\setlist[itemize]{nosep,leftmargin=1.2em,itemsep=1.5pt,topsep=1pt,label=--}
+
+% Bloc expérience / projet : titre à gauche, dates à droite, puis puces
+\newenvironment{joblong}[2]
+{\begin{tabularx}{\linewidth}{@{}X r@{}}\textbf{#1} & \textbf{#2}\\[2pt]\end{tabularx}\begin{itemize}}
+{\end{itemize}}
+
+\begin{document}
+\pagestyle{empty}
+
+% ===================== HEADER =====================
+\begin{tabularx}{\linewidth}{@{}C@{}}
+{\Huge\textbf{Chems Eddine Adel KEBAILY}}\\[3pt]
+\textbf{Master's Student (M1) in Signal and Image Processing $\mid$ Machine Learning $\mid$ Computer Vision}\\[4pt]
+Calais, France $\mid$
+\href{mailto:chemseddine.keb@gmail.com}{\faEnvelope\ chemseddine.keb@gmail.com} $\mid$
+\href{tel:[numéro retiré]}{\faMobile\ [numéro retiré]} $\mid$ \faCar\ Driving licence (B)\\[2pt]
+\href{https://www.linkedin.com/in/chemseddineadel-keb}{\faLinkedin\ LinkedIn} $\mid$
+\href{https://github.com/adkebaily}{\faGithub\ GitHub} $\mid$
+\href{https://chemseddine-kebaily.netlify.app/en/}{\faGlobe\ chemseddine-kebaily.netlify.app}
+\end{tabularx}
+
+% ===================== PROFILE =====================
+\section{Profile}
+\textbf{Master's student in Signal and Image Processing} at the Université du Littoral Côte d'Opale, combining skills in \textbf{machine learning} and \textbf{software development}. Built classification projects (phishing detection with scikit-learn, recognition of 90 animal species with a \textbf{Vision Transformer} and transfer learning in PyTorch) and completed two internships at \textbf{Ooredoo Algeria} in web development (Spring Boot, React, SQL/Oracle) and mobile development (Flutter), following Agile practices. Strong interest in image processing, computer vision and AI agents.
+
+% ===================== EDUCATION =====================
+\section{Education}
+\begin{tabularx}{\linewidth}{@{}p{0.18\linewidth} X@{}}
+2026 -- 2027 & \textbf{Master's degree (M1) in Signal and Image Processing} (ongoing), Université du Littoral Côte d'Opale (ULCO), France \\
+2022 -- 2025 & \textbf{Bachelor's degree in Computer Systems}, M'Hamed Bougara University of Boumerdès, Algeria \\
+2022 & \textbf{Baccalaureate in Technical Mathematics, Civil Engineering} (with honours), Ali Chekiri High School, Chéraga \\
+\end{tabularx}
+
+% ===================== EXPERIENCE =====================
+\section{Professional Experience}
+
+\begin{joblong}{Mobile Development Intern — Ooredoo Algeria}{Dec. 2024 -- Jan. 2025}
+\item Contributed to the development of cross-platform mobile applications with \textbf{Flutter}.
+\item Took part in every stage of the \textbf{Agile} development cycle: requirements analysis, development, testing and review.
+\item Gained exposure to datacenter infrastructure and \textbf{hybrid cloud} architectures (GCP and on-premise).
+\end{joblong}
+
+\begin{joblong}{Web Development Intern — Ooredoo Algeria}{Dec. 2023 -- Jan. 2024}
+\item Developed a web application for managing cash flows of point-of-sale (POS) terminals with \textbf{Spring Boot} and \textbf{React}.
+\item Analysed and processed data with \textbf{SQL} queries; maintained and optimised \textbf{Oracle} databases.
+\item Implemented functional enhancements, \textbf{unit tests}, technical documentation, code reviews and Git versioning.
+\end{joblong}
+
+% ===================== PROJECTS =====================
+\section{Academic Projects}
+
+\begin{joblong}{Phishing Detection with Machine Learning — Bachelor's Final Project (research)}{2025}
+\item Built a dataset, extracted features and compared several classification models with \textbf{Python} and \textbf{scikit-learn}.
+\item Evaluated the models (precision, recall, F1-score) and wrote a research report. \href{https://drive.google.com}{\faFilePdf\ Report}
+\end{joblong}
+
+\begin{joblong}{Animal Recognition (90 species) — Computer Vision}{}
+\item Multi-class image classification with a pre-trained \textbf{Vision Transformer (ViT)} and \textbf{transfer learning} in \textbf{PyTorch}.
+\item Data preparation and augmentation, GPU training (Google Colab, Kaggle) and results analysis. \href{https://github.com/adkebaily}{\faGithub\ Code}
+\end{joblong}
+
+% ===================== SKILLS =====================
+\section{Skills}
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}p{0.25\linewidth} X@{}}
+AI \& data & PyTorch, TensorFlow, scikit-learn, Vision Transformer, transfer learning, classification, Kaggle, Google Colab \\
+Languages & Python, C, C++, Java, JavaScript, PHP, SQL (Oracle), HTML/CSS \\
+Development & Spring Boot, React, Node.js, Flutter, REST APIs \\
+Systems \& networks & Linux (Ubuntu), Windows Server, VirtualBox, Cisco Packet Tracer \\
+Tools \& methods & Git/GitHub, VS Code, IntelliJ IDEA, WampServer, Photoshop; Agile, code reviews, unit testing \\
+Soft skills & Organisation, communication, autonomy, adaptability, teamwork \\
+\end{tabularx}
+
+% ===================== ACTIVITIES =====================
+\section{Student Activities and Training}
+\begin{tabularx}{\linewidth}{@{}p{0.18\linewidth} X@{}}
+2025 -- 2026 & \textbf{Co-manager, Visual Department} — DevUp Club, University of Boumerdès \\
+2024 -- 2025 & \textbf{Member, Development Department} — DevUp Club, University of Boumerdès \\
+Feb. 2025 & \textbf{``AI to Fullstack'' Bootcamp} — DevUp Club, University of Boumerdès (grade: Very Good) \\
+\end{tabularx}
+
+% ===================== LANGUAGES =====================
+\section{Languages}
+\textbf{Arabic:} native \hfill \textbf{French:} B2 \hfill \textbf{English:} B2
+
+\end{document}

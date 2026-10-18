@@ -74,7 +74,12 @@ const sectionObs = new IntersectionObserver(entries => {
 document.querySelectorAll("main section[id]").forEach(s => sectionObs.observe(s));
 
 // ---------- Texte animé (machine à écrire) ----------
-const roles = [
+const roles = root.lang === "en" ? [
+  "Signal and Image Processing",
+  "Machine Learning & Deep Learning",
+  "Computer Vision",
+  "Software Development",
+] : [
   "Traitement du signal et des images",
   "Machine Learning & Deep Learning",
   "Vision par ordinateur",
