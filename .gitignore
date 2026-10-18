@@ -3,3 +3,5 @@ node_modules/
 *.aux
 *.log
 *.out
+cv/private.tex
+cv/out/

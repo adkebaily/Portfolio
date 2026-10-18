@@ -21,10 +21,15 @@
 \setlength{\parindent}{0pt}
 \setlist[itemize]{nosep,leftmargin=1.2em,itemsep=1.5pt,topsep=1pt,label=--}
 
-% Bloc expérience / projet : titre à gauche, dates à droite, puis puces
+% Experience / project block: title left, dates right, then bullets
 \newenvironment{joblong}[2]
 {\begin{tabularx}{\linewidth}{@{}X r@{}}\textbf{#1} & \textbf{#2}\\[2pt]\end{tabularx}\begin{itemize}}
 {\end{itemize}}
+
+% Phone and street address are NOT in this public repo: they are read from
+% cv/private.tex (ignored by git). Without that file -> website version.
+\providecommand{\cvpublic}{0}
+\ifnum\cvpublic=0 \IfFileExists{private.tex}{\input{private.tex}}{}\fi
 
 \begin{document}
 \pagestyle{empty}
@@ -32,10 +37,10 @@
 % ===================== HEADER =====================
 \begin{tabularx}{\linewidth}{@{}C@{}}
 {\Huge\textbf{Chems Eddine Adel KEBAILY}}\\[3pt]
-\textbf{Master's Student (M1) in Signal and Image Processing $\mid$ Machine Learning $\mid$ Computer Vision}\\[4pt]
-Calais, France $\mid$
+\textbf{Master's Student (M1) in Signal and Image Processing $\mid$ AI Engineering $\mid$ AI Agents \& Generative AI}\\[4pt]
+\ifdefined\cvaddress \cvaddress, France\else Calais, France\fi{} $\mid$
 \href{mailto:chemseddine.keb@gmail.com}{\faEnvelope\ chemseddine.keb@gmail.com} $\mid$
-\href{tel:[numéro retiré]}{\faMobile\ [numéro retiré]} $\mid$ \faCar\ Driving licence (B)\\[2pt]
+\ifdefined\cvphone \cvphone{} $\mid$ \fi\faCar\ Driving licence (B)\\[2pt]
 \href{https://www.linkedin.com/in/chemseddineadel-keb}{\faLinkedin\ LinkedIn} $\mid$
 \href{https://github.com/adkebaily}{\faGithub\ GitHub} $\mid$
 \href{https://chemseddine-kebaily.netlify.app/en/}{\faGlobe\ chemseddine-kebaily.netlify.app}
@@ -43,7 +48,7 @@ Calais, France $\mid$
 
 % ===================== PROFILE =====================
 \section{Profile}
-\textbf{Master's student in Signal and Image Processing} at the Université du Littoral Côte d'Opale, combining skills in \textbf{machine learning} and \textbf{software development}. Built classification projects (phishing detection with scikit-learn, recognition of 90 animal species with a \textbf{Vision Transformer} and transfer learning in PyTorch) and completed two internships at \textbf{Ooredoo Algeria} in web development (Spring Boot, React, SQL/Oracle) and mobile development (Flutter), following Agile practices. Strong interest in image processing, computer vision and AI agents.
+\textbf{Master's student in Signal and Image Processing} at the Université du Littoral Côte d'Opale, moving into \textbf{AI engineering}: \textbf{AI agents}, \textbf{generative AI} and \textbf{prompt engineering}. Built CK-AI, an LLM-based assistant integrated into my portfolio, as well as classification projects (phishing detection with scikit-learn, recognition of 90 animal species with a \textbf{Vision Transformer} in PyTorch). Two internships at \textbf{Ooredoo Algeria} in web (Spring Boot, React, SQL/Oracle) and mobile (Flutter) development, following Agile practices. Looking for an internship in AI agents and generative AI.
 
 % ===================== EDUCATION =====================
 \section{Education}
@@ -57,8 +62,7 @@ Calais, France $\mid$
 \section{Professional Experience}
 
 \begin{joblong}{Mobile Development Intern — Ooredoo Algeria}{Dec. 2024 -- Jan. 2025}
-\item Contributed to the development of cross-platform mobile applications with \textbf{Flutter}.
-\item Took part in every stage of the \textbf{Agile} development cycle: requirements analysis, development, testing and review.
+\item Developed cross-platform mobile applications with \textbf{Flutter} across the full \textbf{Agile} cycle (analysis, development, testing, review).
 \item Gained exposure to datacenter infrastructure and \textbf{hybrid cloud} architectures (GCP and on-premise).
 \end{joblong}
 
@@ -69,39 +73,38 @@ Calais, France $\mid$
 \end{joblong}
 
 % ===================== PROJECTS =====================
-\section{Academic Projects}
+\section{Projects}
 
+\begin{joblong}{CK-AI — AI assistant on my portfolio (LLM-based agent)}{2026}
+\item Designed a bilingual conversational assistant with the \textbf{Claude API}: \textbf{system prompt}, profile provided as context, internship offer analysis.
+\item \textbf{Guardrails} (size and rate limits, prompt-injection protection) and \textbf{serverless} deployment on Netlify. \href{https://chemseddine-kebaily.netlify.app/en/}{\faGlobe\ Demo}
+\end{joblong}
+
+% TODO: replace the two links below with the real URLs (Drive report, GitHub repository)
 \begin{joblong}{Phishing Detection with Machine Learning — Bachelor's Final Project (research)}{2025}
-\item Built a dataset, extracted features and compared several classification models with \textbf{Python} and \textbf{scikit-learn}.
-\item Evaluated the models (precision, recall, F1-score) and wrote a research report. \href{https://drive.google.com}{\faFilePdf\ Report}
+\item Feature extraction and comparison of several classification models with \textbf{Python} and \textbf{scikit-learn}; evaluation (precision, recall, F1-score) and research report. \href{https://drive.google.com}{\faFilePdf\ Report}
 \end{joblong}
 
 \begin{joblong}{Animal Recognition (90 species) — Computer Vision}{}
-\item Multi-class image classification with a pre-trained \textbf{Vision Transformer (ViT)} and \textbf{transfer learning} in \textbf{PyTorch}.
-\item Data preparation and augmentation, GPU training (Google Colab, Kaggle) and results analysis. \href{https://github.com/adkebaily}{\faGithub\ Code}
+\item Multi-class image classification with a pre-trained \textbf{Vision Transformer (ViT)} and \textbf{transfer learning} in \textbf{PyTorch}, GPU training (Google Colab, Kaggle). \href{https://github.com/adkebaily}{\faGithub\ Code}
 \end{joblong}
 
 % ===================== SKILLS =====================
 \section{Skills}
 \begin{tabularx}{\linewidth}{@{}>{\bfseries}p{0.25\linewidth} X@{}}
-AI \& data & PyTorch, TensorFlow, scikit-learn, Vision Transformer, transfer learning, classification, Kaggle, Google Colab \\
-Languages & Python, C, C++, Java, JavaScript, PHP, SQL (Oracle), HTML/CSS \\
+Generative AI \& agents & AI agents, prompt engineering, generative AI, LLM APIs (Claude) \\
+Machine learning \& vision & PyTorch, TensorFlow, scikit-learn, Vision Transformer, transfer learning, Kaggle, Google Colab \\
+Programming & Python, C, C++, Java, JavaScript, PHP, SQL (Oracle), HTML/CSS \\
 Development & Spring Boot, React, Node.js, Flutter, REST APIs \\
-Systems \& networks & Linux (Ubuntu), Windows Server, VirtualBox, Cisco Packet Tracer \\
-Tools \& methods & Git/GitHub, VS Code, IntelliJ IDEA, WampServer, Photoshop; Agile, code reviews, unit testing \\
-Soft skills & Organisation, communication, autonomy, adaptability, teamwork \\
+Tools \& methods & Git/GitHub, Linux (Ubuntu), Windows Server, VS Code; Agile, code reviews, unit testing \\
+Languages & Arabic (native), French (B2), English (B2) \\
 \end{tabularx}
 
 % ===================== ACTIVITIES =====================
 \section{Student Activities and Training}
 \begin{tabularx}{\linewidth}{@{}p{0.18\linewidth} X@{}}
-2025 -- 2026 & \textbf{Co-manager, Visual Department} — DevUp Club, University of Boumerdès \\
-2024 -- 2025 & \textbf{Member, Development Department} — DevUp Club, University of Boumerdès \\
-Feb. 2025 & \textbf{``AI to Fullstack'' Bootcamp} — DevUp Club, University of Boumerdès (grade: Very Good) \\
+2024 -- 2026 & \textbf{DevUp Club, University of Boumerdès} — co-manager of the Visual Department (2025--2026), member of the Development Department (2024--2025) \\
+Feb. 2025 & \textbf{``AI to Fullstack'' Bootcamp} — DevUp Club (grade: Very Good) \\
 \end{tabularx}
-
-% ===================== LANGUAGES =====================
-\section{Languages}
-\textbf{Arabic:} native \hfill \textbf{French:} B2 \hfill \textbf{English:} B2
 
 \end{document}

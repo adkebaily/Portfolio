@@ -19,7 +19,7 @@ src/
 netlify/functions/
   ask.mjs               ← assistant CK-AI (/api/ask), appelle l'API Claude
   profile.mjs           ← profil utilisé par l'assistant (à tenir à jour avec le CV)
-cv/                     ← sources LaTeX des CV (FR et EN)
+cv/                     ← sources LaTeX des CV (FR et EN) + build.sh
 ```
 
 ## Modifier un texte
@@ -50,3 +50,16 @@ Protections incluses : la clé reste côté serveur, origine du site vérifiée,
 Géré par **Netlify Forms** (gratuit, 100 messages/mois). À activer une fois :
 Netlify → projet → **Forms** → *Enable form detection*, puis redéployer.
 Pour recevoir les messages par e-mail : Forms → *Form notifications* → *Add notification* → *Email*.
+
+## CV (FR et EN)
+
+Sources : `cv/CV.tex` et `cv/CV_en.tex`. Compilation : `sh cv/build.sh`.
+
+- **Version site** (sans téléphone ni adresse) → copiée dans `public/CV_Kebaily.pdf` et `public/CV_Kebaily_EN.pdf`.
+- **Version complète** (avec téléphone et adresse) → `cv/out/`, jamais publiée.
+  Elle n'est générée que si `cv/private.tex` existe (fichier ignoré par git) :
+
+```latex
+\newcommand{\cvaddress}{Calais}
+\newcommand{\cvphone}{\href{tel:+33...}{\faMobile\ +33 ...}}
+```
