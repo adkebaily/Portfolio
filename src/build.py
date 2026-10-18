@@ -3,6 +3,7 @@
 Usage:  python3 src/build.py
 Every visible text lives in the FR / EN dictionaries below, so both languages stay in sync.
 """
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -97,18 +98,13 @@ FR = {
     "org_title": "Universités, entreprise et club qui ont marqué mon parcours",
     "org_uni": "Université", "org_company": "Entreprise", "org_club": "Club",
 
-    "ct_pill": "Contact", "ct_title_a": "Vous cherchez un stagiaire en", "ct_title_b": "IA\u00a0?",
-    "ct_sub": "Recruteur, enseignant ou étudiant : écrivez-moi pour une offre de stage, un projet universitaire ou simplement pour échanger.",
-    "lk_kicker": "Ce que je recherche", "lk_title": "Un stage pour apprendre et contribuer",
-    "lk1_t": "Agents IA & IA générative", "lk1_d": "Conception d'agents, intégration de LLM, automatisation",
-    "lk2_t": "Prompt engineering", "lk2_d": "Rédaction, test et amélioration de prompts",
-    "lk3_t": "Stage de Master 1", "lk3_d": "Master Traitement du signal et des images, ULCO",
-    "lk4_t": "Basé à Calais", "lk4_d": "Hauts-de-France · France",
-    "f_who": "Vous êtes", "f_who1": "Recruteur / entreprise", "f_who2": "Enseignant / université", "f_who3": "Étudiant", "f_who4": "Autre",
-    "f_name": "Nom complet", "f_name_ph": "Votre nom", "f_email": "Adresse e-mail",
-    "f_org": "Entreprise ou école (facultatif)", "f_org_ph": "Nom de l'organisation",
-    "f_subject": "Objet", "f_s1": "Offre de stage", "f_s2": "Projet ou collaboration", "f_s3": "Question", "f_s4": "Autre",
-    "f_message": "Message", "f_message_ph": "Décrivez l'offre de stage, le projet ou votre question…", "f_send": "Envoyer le message",
+    "ct_kicker": "Restons en contact", "ct_title": "Travaillons ensemble sur votre prochain projet IA",
+    "ct_sub": "Une offre de stage, un projet d'agent IA, une collaboration ou simplement une question ? Écrivez-moi, je serai ravi d'en discuter.",
+    "f_name": "Nom complet", "f_name_ph": "Votre nom et prénom", "f_email": "Adresse e-mail", "f_email_ph": "nom@exemple.com",
+    "f_org": "Entreprise ou école (facultatif)", "f_org_ph": "Entreprise, laboratoire ou université",
+    "f_subject": "Objet", "f_subject_ph": "Stage, projet, collaboration…",
+    "f_message": "Message", "f_message_ph": "Présentez votre offre, votre projet ou votre question. Ajoutez les détails utiles (missions, durée, outils…).",
+    "f_send": "Envoyer le message", "ct_direct": "Ou contactez-moi directement",
     "footer_note": "Site conçu et développé par Chems Eddine Adel avec l'aide de l'IA",
 }
 
@@ -197,18 +193,13 @@ EN = {
     "org_title": "Universities, company and club that shaped my journey",
     "org_uni": "University", "org_company": "Company", "org_club": "Club",
 
-    "ct_pill": "Contact", "ct_title_a": "Looking for an", "ct_title_b": "AI intern?",
-    "ct_sub": "Recruiter, teacher or student: write to me about an internship offer, a university project or just to connect.",
-    "lk_kicker": "What I'm looking for", "lk_title": "An internship to learn and contribute",
-    "lk1_t": "AI agents & generative AI", "lk1_d": "Agent design, LLM integration, automation",
-    "lk2_t": "Prompt engineering", "lk2_d": "Writing, testing and improving prompts",
-    "lk3_t": "Master's (M1) internship", "lk3_d": "Master's in Signal and Image Processing, ULCO",
-    "lk4_t": "Based in Calais", "lk4_d": "Hauts-de-France · France",
-    "f_who": "You are", "f_who1": "Recruiter / company", "f_who2": "Teacher / university", "f_who3": "Student", "f_who4": "Other",
-    "f_name": "Full name", "f_name_ph": "Your name", "f_email": "Email address",
-    "f_org": "Company or school (optional)", "f_org_ph": "Organisation name",
-    "f_subject": "Subject", "f_s1": "Internship offer", "f_s2": "Project or collaboration", "f_s3": "Question", "f_s4": "Other",
-    "f_message": "Message", "f_message_ph": "Describe the internship offer, the project or your question…", "f_send": "Send message",
+    "ct_kicker": "Let's connect", "ct_title": "Let's work together on your next AI project",
+    "ct_sub": "An internship offer, an AI agent project, a collaboration or just a question? Write to me — I'd be glad to talk about it.",
+    "f_name": "Full name", "f_name_ph": "Your full name", "f_email": "Email address", "f_email_ph": "name@example.com",
+    "f_org": "Company or school (optional)", "f_org_ph": "Company, lab or university",
+    "f_subject": "Subject", "f_subject_ph": "Internship, project, collaboration…",
+    "f_message": "Message", "f_message_ph": "Tell me about your offer, project or question. Include useful details (tasks, duration, tools…).",
+    "f_send": "Send message", "ct_direct": "Or reach me directly",
     "footer_note": "Site designed and built by Chems Eddine Adel with the help of AI",
 }
 
@@ -282,8 +273,16 @@ THANKS = {
 }
 
 
+def asset_version() -> str:
+    h = hashlib.sha1()
+    for name in ("styles.css", "app.js"):
+        h.update((ROOT / "public" / "assets" / name).read_bytes())
+    return h.hexdigest()[:10]
+
+
 def render(texts: dict) -> str:
     values = dict(texts)
+    values["version"] = asset_version()
     values["i18n_json"] = json.dumps(JS[texts["lang"]], ensure_ascii=False).replace("</", "<\\/")
     out = re.sub(r"\{\{(\w+)\}\}", lambda m: values[m.group(1)], TEMPLATE)
     leftover = re.findall(r"\{\{\w+\}\}", out)

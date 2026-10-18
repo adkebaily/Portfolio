@@ -16,6 +16,7 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
 
+# styles.css et app.js sont appelés avec ?v=<empreinte> : chaque modification change l'URL.
 [[headers]]
   for = "/assets/*"
   [headers.values]
