@@ -99,7 +99,7 @@ FR = {
     "org_uni": "Université", "org_company": "Entreprise", "org_club": "Club",
 
     "ct_kicker": "Restons en contact", "ct_title": "Travaillons ensemble sur votre prochain projet IA",
-    "ct_sub": "Une offre de stage, un projet d'agent IA, une collaboration ou simplement une question ? Écrivez-moi, je serai ravi d'en discuter.",
+    "ct_sub": "Un projet d'agent IA, une collaboration ou simplement une question ? Écrivez-moi, je serai ravi d'en discuter.",
     "f_name": "Nom complet", "f_name_ph": "Votre nom et prénom", "f_email": "Adresse e-mail", "f_email_ph": "nom@exemple.com",
     "f_org": "Entreprise ou école (facultatif)", "f_org_ph": "Entreprise, laboratoire ou université",
     "f_subject": "Objet", "f_subject_ph": "Stage, projet, collaboration…",
@@ -194,7 +194,7 @@ EN = {
     "org_uni": "University", "org_company": "Company", "org_club": "Club",
 
     "ct_kicker": "Let's connect", "ct_title": "Let's work together on your next AI project",
-    "ct_sub": "An internship offer, an AI agent project, a collaboration or just a question? Write to me — I'd be glad to talk about it.",
+    "ct_sub": "An AI agent project, a collaboration or just a question? Write to me — I'd be glad to talk about it.",
     "f_name": "Full name", "f_name_ph": "Your full name", "f_email": "Email address", "f_email_ph": "name@example.com",
     "f_org": "Company or school (optional)", "f_org_ph": "Company, lab or university",
     "f_subject": "Subject", "f_subject_ph": "Internship, project, collaboration…",
