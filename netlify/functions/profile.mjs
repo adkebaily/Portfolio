@@ -3,7 +3,7 @@ export const PROFILE = `
 Full name: Chems Eddine Adel Kebaily. Given names (first names): Chems Eddine Adel. Family name: Kebaily. Refer to him as "Chems Eddine Adel".
 Location: Calais, France
 Status: Master's student (M1) in Signal and Image Processing (Traitement du signal et des images), Université du Littoral Côte d'Opale (ULCO), 2026–2027, ongoing. Open to internship opportunities in signal processing, image processing and AI. Exact availability dates: not stated — suggest contacting him.
-Contact: chemseddine.keb@gmail.com · LinkedIn: linkedin.com/in/chemseddineadel-keb · GitHub: github.com/adkebaily · Phone: [numéro retiré] · Driving licence B
+Contact: chemseddine.keb@gmail.com (preferred) or the contact form on the website; his phone number is not shared on the website · LinkedIn: linkedin.com/in/chemseddineadel-keb · GitHub: github.com/adkebaily · Driving licence B
 CVs: French and English CVs can be downloaded from the website.
 
 Education:
