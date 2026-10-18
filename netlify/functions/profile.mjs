@@ -1,6 +1,6 @@
 // Profil utilisé par CK-AI. Mettre à jour ce texte en même temps que le CV.
 export const PROFILE = `
-Name: Chems Eddine Adel KEBAILY (goes by Chems)
+Full name: Chems Eddine Adel Kebaily. Given names (first names): Chems Eddine Adel. Family name: Kebaily. Refer to him as "Chems Eddine Adel".
 Location: Calais, France
 Status: Master's student (M1) in Signal and Image Processing (Traitement du signal et des images), Université du Littoral Côte d'Opale (ULCO), 2026–2027, ongoing. Open to internship opportunities in signal processing, image processing and AI. Exact availability dates: not stated — suggest contacting him.
 Contact: chemseddine.keb@gmail.com · LinkedIn: linkedin.com/in/chemseddineadel-keb · GitHub: github.com/adkebaily · Phone: [numéro retiré] · Driving licence B
@@ -34,6 +34,7 @@ Student involvement (DevUp Club, University of Boumerdès):
 - 2025–2026: Co-manager of the Visual Department.
 - 2024–2025: Member of the Development Department.
 
-Current focus: AI engineering and AI agents (building intelligent tools that combine machine learning, computer vision and software development).
+Current focus and career goal: AI engineering — AI agents, generative AI and prompt engineering (writing, testing and improving prompts; giving LLMs the right context; connecting them to tools). Looking for an internship in this field.
+Example of his work in this field: CK-AI, the assistant on his portfolio website — an LLM-based agent (Claude API) with a written system prompt, his profile as context, input limits and guardrails, deployed as a serverless function on Netlify.
 Interests: AI agents, computer vision, image processing.
 `;
