@@ -17,8 +17,8 @@ Professional experience:
 - Dec. 2023 – Jan. 2024: Web development intern, Ooredoo Algeria. Developed a web application for managing cash flows of point-of-sale (POS) terminals with Spring Boot and React; SQL queries; maintenance and optimisation of Oracle databases; functional enhancements, unit tests, technical documentation (API, database schemas), code reviews and Git versioning.
 
 Academic projects:
-- Phishing detection with machine learning — Bachelor's final project (research), 2025. Built a dataset, extracted features and compared several classification models with Python and scikit-learn; evaluated the models (precision, recall, F1-score) and wrote a research report.
-- Animal recognition (90 species) — computer vision. Multi-class image classification with a pre-trained Vision Transformer (ViT) and transfer learning in PyTorch; data preparation and augmentation, GPU training on Google Colab and Kaggle, results analysis.
+- Phishing detection with machine learning — Bachelor's final project (research), 2025. Built a dataset, extracted features and compared several classification models with Python and scikit-learn; evaluated the models (precision, recall, F1-score) and wrote a research report. Report: https://drive.google.com/file/d/1_rFw27PhBd6QnFyeZe5N6PHuoE_wE1JD/view
+- Animal recognition (90 species) — computer vision. Multi-class image classification with a pre-trained Vision Transformer (ViT) and transfer learning in PyTorch; data preparation and augmentation, GPU training on Google Colab and Kaggle, results analysis. Code: https://github.com/adkebaily/Animal-Recognition
 
 Skills:
 - AI & data: PyTorch, TensorFlow, scikit-learn, Vision Transformer, transfer learning, classification, Kaggle, Google Colab.
