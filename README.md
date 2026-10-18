@@ -60,6 +60,6 @@ Sources : `cv/CV.tex` et `cv/CV_en.tex`. Compilation : `sh cv/build.sh`.
   Elle n'est générée que si `cv/private.tex` existe (fichier ignoré par git) :
 
 ```latex
-\newcommand{\cvaddress}{Calais}
+\newcommand{\cvaddress}{N° et rue, code postal Ville}
 \newcommand{\cvphone}{\href{tel:+33...}{\faMobile\ +33 ...}}
 ```
