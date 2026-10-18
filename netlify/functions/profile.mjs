@@ -34,5 +34,6 @@ Student involvement (DevUp Club, University of Boumerdès):
 - 2025–2026: Co-manager of the Visual Department.
 - 2024–2025: Member of the Development Department.
 
-Interests: image processing, computer vision, AI agents.
+Current focus: AI engineering and AI agents (building intelligent tools that combine machine learning, computer vision and software development).
+Interests: AI agents, computer vision, image processing.
 `;

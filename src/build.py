@@ -24,12 +24,12 @@ FR = {
 
     "hero_status": "Ouvert aux opportunités de stage",
     "hero_h1_a": "Bonjour, je suis Chems.",
-    "hero_h1_b": "Je donne du sens aux",
-    "hero_word_1": "signaux",
-    "hero_lead": "Étudiant en Master 1 Traitement du signal et des images à l'Université du Littoral Côte d'Opale. Je combine apprentissage automatique, vision par ordinateur et développement logiciel pour transformer des données brutes en outils utiles.",
+    "hero_h1_b": "Je conçois des",
+    "hero_word_1": "agents IA",
+    "hero_lead": "Étudiant en Master 1 Traitement du signal et des images à l'Université du Littoral Côte d'Opale, je me spécialise en ingénierie IA et en agents IA. J'associe apprentissage automatique, vision par ordinateur et développement logiciel pour créer des outils intelligents et utiles.",
     "hero_audience": 'Vous êtes <b class="c1">recruteur</b> ou <b class="c2">enseignant</b> ?',
     "hero_cta_ai": "Demander à CK-AI", "or": "ou", "hero_cta_cv": "Télécharger mon CV",
-    "chip_tsi": "Traitement d'images",
+    "chip_tsi": "Agents IA",
     "stat_internships": "stages", "stat_projects": "projets IA", "stat_languages": "langues",
 
     "ai_pill": "Assistant IA", "ai_title_a": "Une question ? Demandez à",
@@ -119,12 +119,12 @@ EN = {
 
     "hero_status": "Open to internship opportunities",
     "hero_h1_a": "Hi, I'm Chems.",
-    "hero_h1_b": "I make sense of",
-    "hero_word_1": "signals",
-    "hero_lead": "Master's student in Signal and Image Processing at the Université du Littoral Côte d'Opale. I combine machine learning, computer vision and software development to turn raw data into useful tools.",
+    "hero_h1_b": "I build",
+    "hero_word_1": "AI agents",
+    "hero_lead": "Master's student in Signal and Image Processing at the Université du Littoral Côte d'Opale, focusing on AI engineering and AI agents. I combine machine learning, computer vision and software development to build intelligent, useful tools.",
     "hero_audience": 'Are you a <b class="c1">recruiter</b> or a <b class="c2">teacher</b>?',
     "hero_cta_ai": "Ask CK-AI", "or": "or", "hero_cta_cv": "Download my CV",
-    "chip_tsi": "Image processing",
+    "chip_tsi": "AI Agents",
     "stat_internships": "internships", "stat_projects": "AI projects", "stat_languages": "languages",
 
     "ai_pill": "AI assistant", "ai_title_a": "Have a question? Ask",
@@ -205,7 +205,7 @@ EN = {
 # Strings used by assets/app.js (chat, rotating words, form, offline answers)
 JS = {
     "fr": {
-        "words": ["signaux", "images", "données"],
+        "words": ["agents IA", "solutions IA", "modèles IA"],
         "online": "En ligne", "demo": "Mode démo",
         "typing": "CK-AI écrit…",
         "error": "Désolé, je n'ai pas pu répondre. Réessayez dans un instant ou écrivez directement à chemseddine.keb@gmail.com.",
@@ -233,7 +233,7 @@ JS = {
         "default": "Je réponds aux questions sur le parcours, les projets, les compétences et les expériences de Chems. Essayez par exemple : « Quels sont ses projets IA ? » ou « Quelle est sa formation ? »",
     },
     "en": {
-        "words": ["signals", "images", "data"],
+        "words": ["AI agents", "AI solutions", "AI models"],
         "online": "Online", "demo": "Demo mode",
         "typing": "CK-AI is typing…",
         "error": "Sorry, I couldn't answer. Please try again in a moment or email chemseddine.keb@gmail.com directly.",
