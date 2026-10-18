@@ -16,11 +16,15 @@ Professional experience:
 - Dec. 2024 – Jan. 2025: Mobile development intern, Ooredoo Algeria. Contributed to cross-platform mobile apps with Flutter; took part in every stage of the Agile development cycle (requirements, development, testing, review); exposure to datacenter infrastructure and hybrid cloud (GCP and on-premise).
 - Dec. 2023 – Jan. 2024: Web development intern, Ooredoo Algeria. Developed a web application for managing cash flows of point-of-sale (POS) terminals with Spring Boot and React; SQL queries; maintenance and optimisation of Oracle databases; functional enhancements, unit tests, technical documentation (API, database schemas), code reviews and Git versioning.
 
-Academic projects:
+Projects:
+- AI agent for administrative document processing (Agent IA de traitement de dossiers administratifs) — personal project, 2026. A citizen or a public-service agent (CAF, CROUS, mairie, préfecture) uploads scanned documents (tax notice, proof of address, bank details, school certificate…). Pipeline: image preprocessing with OpenCV (non-local means denoising, Sauvola local binarisation, small-speck removal, projection-profile deskewing), OCR with Tesseract (French), document classification and structured field extraction with an LLM (Claude API, JSON schema output, per-field confidence), deterministic business rules in Python (expired ID, proof of address older than 3 months, IBAN checksum, name consistency across documents), dossier completeness check against a checklist per procedure, and human validation of uncertain cases. Built with FastAPI, PostgreSQL, n8n orchestration (webhook, email approval), Docker Compose and a Streamlit dashboard. Evaluated on 40 synthetic labelled documents (no real personal data): 100% document classification accuracy, 97.6% field exact-match accuracy (F1 0.976), 10% of documents sent to human review; preprocessing reduces the OCR character error rate from 0.625 to 0.007 (about 90 times lower), and an ablation study showed the gain comes from denoising and local binarisation rather than deskewing. Code: https://github.com/adkebaily/agent-dossiers-administratifs
 - Phishing detection with machine learning — Bachelor's final project (research), 2025. Built a dataset, extracted features and compared several classification models with Python and scikit-learn; evaluated the models (precision, recall, F1-score) and wrote a research report. Report: https://drive.google.com/file/d/1_rFw27PhBd6QnFyeZe5N6PHuoE_wE1JD/view
 - Animal recognition (90 species) — computer vision. Multi-class image classification with a pre-trained Vision Transformer (ViT) and transfer learning in PyTorch; data preparation and augmentation, GPU training on Google Colab and Kaggle, results analysis. Code: https://github.com/adkebaily/Animal-Recognition
 
 Skills:
+- AI agents & LLM: Claude API, structured outputs, n8n, FastAPI, prompt engineering, human-in-the-loop validation, evaluation on labelled data.
+- Image processing: OpenCV, Tesseract OCR, denoising, binarisation (Sauvola), deskewing.
+- Tools: Docker, PostgreSQL.
 - AI & data: PyTorch, TensorFlow, scikit-learn, Vision Transformer, transfer learning, classification, Kaggle, Google Colab.
 - Programming languages: Python, C, C++, Java, JavaScript, PHP, SQL (Oracle), HTML/CSS.
 - Development: Spring Boot, React, Node.js, Flutter, REST APIs.

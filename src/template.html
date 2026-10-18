@@ -91,7 +91,7 @@
         </ul>
         <div class="stat-card">
           <div><strong data-count="2">2</strong><span>{{stat_internships}}</span></div>
-          <div><strong data-count="2">2</strong><span>{{stat_projects}}</span></div>
+          <div><strong data-count="3">3</strong><span>{{stat_projects}}</span></div>
           <div><strong data-count="3">3</strong><span>{{stat_languages}}</span></div>
         </div>
       </div>
@@ -177,7 +177,17 @@
 
       <div class="showcase reveal">
         <div class="showcase-visual">
-          <div class="screen" data-project="0">
+          <div class="screen" data-project="2">
+            <div class="screen-bar"><i></i><i></i><i></i><span>agent-dossiers-administratifs</span></div>
+            <div class="mock mock-phish">
+              <div class="url-row ok"><span>avis_imposition.jpg</span><b>{{mock3_ok}}</b></div>
+              <div class="url-row ok"><span>justificatif_domicile.jpg</span><b>{{mock3_ok}}</b></div>
+              <div class="url-row bad"><span>rib.jpg</span><b>{{mock3_review}}</b></div>
+              <div class="url-row bad"><span>piece_identite</span><b>{{mock3_missing}}</b></div>
+              <div class="models"><span>OpenCV</span><span>OCR</span><span>LLM</span><span>n8n</span><span>97,6 %</span></div>
+            </div>
+          </div>
+          <div class="screen" data-project="0" hidden>
             <div class="screen-bar"><i></i><i></i><i></i><span>phishing-detector.ipynb</span></div>
             <div class="mock mock-phish">
               <div class="url-row ok"><span>https://ulco.fr/master-tsi</span><b>{{mock_legit}}</b></div>
@@ -196,7 +206,14 @@
           </div>
         </div>
         <div class="showcase-text">
-          <article class="project" data-project="0">
+          <article class="project" data-project="2">
+            <h3>{{p3_title}}</h3>
+            <p class="ctx">{{p3_ctx}}</p>
+            <p>{{p3_desc}}</p>
+            <div class="tags"><span>Python</span><span>OpenCV</span><span>Tesseract</span><span>FastAPI</span><span>LLM (Claude)</span><span>n8n</span><span>Docker</span></div>
+            <a class="link" href="https://github.com/adkebaily/agent-dossiers-administratifs" target="_blank" rel="noopener">{{p3_link}} <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="project" data-project="0" hidden>
             <h3>{{p1_title}}</h3>
             <p class="ctx">{{p1_ctx}}</p>
             <p>{{p1_desc}}</p>
@@ -213,7 +230,8 @@
         </div>
       </div>
       <div class="tabs reveal" role="tablist">
-        <button type="button" role="tab" class="on" aria-selected="true" data-tab="0">{{p1_short}}</button>
+        <button type="button" role="tab" class="on" aria-selected="true" data-tab="2">{{p3_short}}</button>
+        <button type="button" role="tab" aria-selected="false" data-tab="0">{{p1_short}}</button>
         <button type="button" role="tab" aria-selected="false" data-tab="1">{{p2_short}}</button>
       </div>
     </div>

@@ -91,7 +91,7 @@
         </ul>
         <div class="stat-card">
           <div><strong data-count="2">2</strong><span>internships</span></div>
-          <div><strong data-count="2">2</strong><span>AI projects</span></div>
+          <div><strong data-count="3">3</strong><span>AI projects</span></div>
           <div><strong data-count="3">3</strong><span>languages</span></div>
         </div>
       </div>
@@ -171,13 +171,23 @@
     <div class="container">
       <div class="section-head reveal">
         <span class="pill">● Projects</span>
-        <h2>Academic <span class="grad">projects</span></h2>
-        <p>Machine learning and computer vision projects, from data to results.</p>
+        <h2>My <span class="grad">projects</span></h2>
+        <p>AI agents, machine learning and computer vision, from data to measured results.</p>
       </div>
 
       <div class="showcase reveal">
         <div class="showcase-visual">
-          <div class="screen" data-project="0">
+          <div class="screen" data-project="2">
+            <div class="screen-bar"><i></i><i></i><i></i><span>agent-dossiers-administratifs</span></div>
+            <div class="mock mock-phish">
+              <div class="url-row ok"><span>avis_imposition.jpg</span><b>validated</b></div>
+              <div class="url-row ok"><span>justificatif_domicile.jpg</span><b>validated</b></div>
+              <div class="url-row bad"><span>rib.jpg</span><b>human review</b></div>
+              <div class="url-row bad"><span>piece_identite</span><b>missing</b></div>
+              <div class="models"><span>OpenCV</span><span>OCR</span><span>LLM</span><span>n8n</span><span>97,6 %</span></div>
+            </div>
+          </div>
+          <div class="screen" data-project="0" hidden>
             <div class="screen-bar"><i></i><i></i><i></i><span>phishing-detector.ipynb</span></div>
             <div class="mock mock-phish">
               <div class="url-row ok"><span>https://ulco.fr/master-tsi</span><b>legitimate</b></div>
@@ -196,7 +206,14 @@
           </div>
         </div>
         <div class="showcase-text">
-          <article class="project" data-project="0">
+          <article class="project" data-project="2">
+            <h3>AI agent for administrative document processing</h3>
+            <p class="ctx">Personal project · AI in public services · 2026</p>
+            <p>A citizen uploads their documents (tax notice, proof of address, bank details…). The agent cleans the image (denoising, Sauvola binarisation, deskewing), reads it with OCR, identifies the document, extracts the fields with an LLM and checks whether the file is complete; uncertain cases go to human validation. Results on 40 labelled documents: 100% classification accuracy, 97.6% field accuracy, OCR error divided by 90 thanks to preprocessing.</p>
+            <div class="tags"><span>Python</span><span>OpenCV</span><span>Tesseract</span><span>FastAPI</span><span>LLM (Claude)</span><span>n8n</span><span>Docker</span></div>
+            <a class="link" href="https://github.com/adkebaily/agent-dossiers-administratifs" target="_blank" rel="noopener">View the code and results <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="project" data-project="0" hidden>
             <h3>Phishing detection with machine learning</h3>
             <p class="ctx">Bachelor's final project · Research · 2025</p>
             <p>Study and comparison of several classification models to tell phishing websites and URLs apart from legitimate ones, with feature extraction and a research report.</p>
@@ -213,7 +230,8 @@
         </div>
       </div>
       <div class="tabs reveal" role="tablist">
-        <button type="button" role="tab" class="on" aria-selected="true" data-tab="0">Phishing detection</button>
+        <button type="button" role="tab" class="on" aria-selected="true" data-tab="2">Administrative document agent</button>
+        <button type="button" role="tab" aria-selected="false" data-tab="0">Phishing detection</button>
         <button type="button" role="tab" aria-selected="false" data-tab="1">Animal recognition</button>
       </div>
     </div>
@@ -361,7 +379,7 @@
   <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
 </a>
 
-<script>window.CK_I18N = {"words": ["AI agents", "prompts", "AI solutions"], "online": "Online", "demo": "Demo mode", "typing": "CK-AI is typing…", "error": "Sorry, I couldn't answer. Please try again in a moment or email chemseddine.keb@gmail.com directly.", "offer_prefix": "Here is an offer. Analyse how well it matches Chems Eddine Adel's profile:\n\n", "offer_label": "📎 Offer pasted", "chars": "characters", "offer_demo": "Offer analysis uses AI, which isn't enabled on this site yet. In short: Chems Eddine Adel is a **Master's student in Signal and Image Processing (ULCO)**, with projects in **machine learning** (scikit-learn) and **computer vision** (PyTorch, Vision Transformer), and two internships in **web and mobile development** (Spring Boot, React, Flutter). For a precise answer, contact him: chemseddine.keb@gmail.com.", "sent": "Thank you! Your message has been sent. I'll get back to you soon.", "send_error": "Sending failed. Please email me directly at chemseddine.keb@gmail.com.", "faq": [[["background", "education", "master", "study", "studies", "degree", "bachelor", "ulco", "university"], "Chems Eddine Adel is a **Master's (M1) student in Signal and Image Processing** at the Université du Littoral Côte d'Opale (ULCO, 2026–2027). Before that, he earned a **Bachelor's degree in Computer Systems** from the University of Boumerdès (2022–2025) and a Baccalaureate in Technical Mathematics (with honours, 2022)."], [["project", "phishing", "animal", "vit", "transformer", "vision"], "Two main projects:\n• **Phishing detection** (Bachelor's final project, 2025): comparison of classification models with Python and scikit-learn.\n• **Recognition of 90 animal species**: pre-trained Vision Transformer and transfer learning in PyTorch."], [["skill", "tool", "language", "python", "tech", "framework", "stack"], "**AI & data**: PyTorch, TensorFlow, scikit-learn, Vision Transformer, transfer learning.\n**Programming**: Python, C, C++, Java, JavaScript, PHP, SQL.\n**Development**: Spring Boot, React, Node.js, Flutter.\n**Methods**: Agile, code reviews, unit testing."], [["experience", "internship", "ooredoo", "work", "job", "company"], "Two internships at **Ooredoo Algeria**:\n• **Mobile development** (Dec. 2024 – Jan. 2025): Flutter apps, Agile cycle, hybrid cloud.\n• **Web development** (Dec. 2023 – Jan. 2024): POS cash-flow management app with Spring Boot and React, SQL/Oracle."], [["contact", "email", "mail", "reach", "phone", "linkedin"], "You can email Chems Eddine Adel at **chemseddine.keb@gmail.com**, reach him on LinkedIn (chemseddineadel-keb), or use the contact form at the bottom of the page."], [["agent", "generative", "prompt", "llm", "ai engineering", "focus", "speciali"], "Chems Eddine Adel is moving into **AI engineering**: **AI agents**, **generative AI** and **prompt engineering**. This site's assistant, CK-AI, is a concrete example: an LLM-based agent (Claude) with precise instructions, his profile as context, and guardrails. He is looking for an internship in this field."], [["language", "english", "french", "arabic", "speak"], "Chems Eddine Adel speaks **Arabic** (native), **French** (B2) and **English** (B2)."], [["available", "availability", "when", "hire", "recruit"], "Chems Eddine Adel is open to **internship opportunities** in signal processing, image processing and AI. For exact dates, the best is to email him: chemseddine.keb@gmail.com."]], "default": "I answer questions about Chems Eddine Adel's background, projects, skills and experience. Try for example: “What are his AI projects?” or “What is his education?”"};</script>
+<script>window.CK_I18N = {"words": ["AI agents", "prompts", "AI solutions"], "online": "Online", "demo": "Demo mode", "typing": "CK-AI is typing…", "error": "Sorry, I couldn't answer. Please try again in a moment or email chemseddine.keb@gmail.com directly.", "offer_prefix": "Here is an offer. Analyse how well it matches Chems Eddine Adel's profile:\n\n", "offer_label": "📎 Offer pasted", "chars": "characters", "offer_demo": "Offer analysis uses AI, which isn't enabled on this site yet. In short: Chems Eddine Adel is a **Master's student in Signal and Image Processing (ULCO)**, with projects in **machine learning** (scikit-learn) and **computer vision** (PyTorch, Vision Transformer), and two internships in **web and mobile development** (Spring Boot, React, Flutter). For a precise answer, contact him: chemseddine.keb@gmail.com.", "sent": "Thank you! Your message has been sent. I'll get back to you soon.", "send_error": "Sending failed. Please email me directly at chemseddine.keb@gmail.com.", "faq": [[["background", "education", "master", "study", "studies", "degree", "bachelor", "ulco", "university"], "Chems Eddine Adel is a **Master's (M1) student in Signal and Image Processing** at the Université du Littoral Côte d'Opale (ULCO, 2026–2027). Before that, he earned a **Bachelor's degree in Computer Systems** from the University of Boumerdès (2022–2025) and a Baccalaureate in Technical Mathematics (with honours, 2022)."], [["project", "phishing", "animal", "vit", "transformer", "vision", "administrative", "document", "ocr", "n8n"], "Three main projects:\n• **AI agent for administrative document processing** (2026): image preprocessing (OpenCV), OCR, LLM field extraction, completeness checks and human validation; 97.6% field accuracy on 40 labelled documents.\n• **Phishing detection** (Bachelor's final project, 2025): comparison of classification models with Python and scikit-learn.\n• **Recognition of 90 animal species**: pre-trained Vision Transformer and transfer learning in PyTorch."], [["skill", "tool", "language", "python", "tech", "framework", "stack"], "**AI & data**: PyTorch, TensorFlow, scikit-learn, Vision Transformer, transfer learning.\n**Programming**: Python, C, C++, Java, JavaScript, PHP, SQL.\n**Development**: Spring Boot, React, Node.js, Flutter.\n**Methods**: Agile, code reviews, unit testing."], [["experience", "internship", "ooredoo", "work", "job", "company"], "Two internships at **Ooredoo Algeria**:\n• **Mobile development** (Dec. 2024 – Jan. 2025): Flutter apps, Agile cycle, hybrid cloud.\n• **Web development** (Dec. 2023 – Jan. 2024): POS cash-flow management app with Spring Boot and React, SQL/Oracle."], [["contact", "email", "mail", "reach", "phone", "linkedin"], "You can email Chems Eddine Adel at **chemseddine.keb@gmail.com**, reach him on LinkedIn (chemseddineadel-keb), or use the contact form at the bottom of the page."], [["agent", "generative", "prompt", "llm", "ai engineering", "focus", "speciali"], "Chems Eddine Adel is moving into **AI engineering**: **AI agents**, **generative AI** and **prompt engineering**. This site's assistant, CK-AI, is a concrete example: an LLM-based agent (Claude) with precise instructions, his profile as context, and guardrails. He is looking for an internship in this field."], [["language", "english", "french", "arabic", "speak"], "Chems Eddine Adel speaks **Arabic** (native), **French** (B2) and **English** (B2)."], [["available", "availability", "when", "hire", "recruit"], "Chems Eddine Adel is open to **internship opportunities** in signal processing, image processing and AI. For exact dates, the best is to email him: chemseddine.keb@gmail.com."]], "default": "I answer questions about Chems Eddine Adel's background, projects, skills and experience. Try for example: “What are his AI projects?” or “What is his education?”"};</script>
 <script src="../assets/app.js?v=a56bbd2a3c" defer></script>
 </body>
 </html>

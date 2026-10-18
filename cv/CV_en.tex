@@ -3,7 +3,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
-\usepackage[scale=0.92]{geometry}
+\usepackage[scale=0.93]{geometry}
 \usepackage{parskip}
 \usepackage{tabularx}
 \usepackage{enumitem}
@@ -17,9 +17,9 @@
 \hypersetup{colorlinks=true,urlcolor=linkcolour,linkcolor=linkcolour}
 \newcolumntype{C}{>{\centering\arraybackslash}X}
 \titleformat{\section}{\large\bfseries\raggedright}{}{0em}{}[\titlerule]
-\titlespacing{\section}{0pt}{6pt}{4pt}
+\titlespacing{\section}{0pt}{4pt}{3pt}
 \setlength{\parindent}{0pt}
-\setlist[itemize]{nosep,leftmargin=1.2em,itemsep=1.5pt,topsep=1pt,label=--}
+\setlist[itemize]{nosep,leftmargin=1.2em,itemsep=0.5pt,topsep=0pt,label=--}
 
 % Experience / project block: title left, dates right, then bullets
 \newenvironment{joblong}[2]
@@ -48,7 +48,7 @@
 
 % ===================== PROFILE =====================
 \section{Profile}
-\textbf{Master's student in Signal and Image Processing} at the Université du Littoral Côte d'Opale, moving into \textbf{AI engineering}: \textbf{AI agents}, \textbf{generative AI} and \textbf{prompt engineering}. Built CK-AI, an LLM-based assistant integrated into my portfolio, as well as classification projects (phishing detection with scikit-learn, recognition of 90 animal species with a \textbf{Vision Transformer} in PyTorch). Two internships at \textbf{Ooredoo Algeria} in web (Spring Boot, React, SQL/Oracle) and mobile (Flutter) development, following Agile practices. Looking for an internship in AI agents and generative AI.
+\textbf{Master's student in Signal and Image Processing} at the Université du Littoral Côte d'Opale, moving into \textbf{AI engineering}: \textbf{AI agents}, \textbf{generative AI} and \textbf{prompt engineering}. Built an \textbf{AI agent for administrative document processing} (OCR, LLM, n8n), CK-AI, my portfolio's LLM assistant, and classification projects (phishing, \textbf{Vision Transformer}). Two internships at \textbf{Ooredoo Algeria} in web (Spring Boot, React, SQL/Oracle) and mobile (Flutter) development, following Agile practices. Looking for an internship in AI agents and generative AI.
 
 % ===================== EDUCATION =====================
 \section{Education}
@@ -62,8 +62,7 @@
 \section{Professional Experience}
 
 \begin{joblong}{Mobile Development Intern — Ooredoo Algeria}{Dec. 2024 -- Jan. 2025}
-\item Developed cross-platform mobile applications with \textbf{Flutter} across the full \textbf{Agile} cycle (analysis, development, testing, review).
-\item Gained exposure to datacenter infrastructure and \textbf{hybrid cloud} architectures (GCP and on-premise).
+\item Cross-platform mobile apps with \textbf{Flutter} across the full \textbf{Agile} cycle; exposure to datacenter and \textbf{hybrid cloud} (GCP, on-premise).
 \end{joblong}
 
 \begin{joblong}{Web Development Intern — Ooredoo Algeria}{Dec. 2023 -- Jan. 2024}
@@ -74,6 +73,11 @@
 
 % ===================== PROJECTS =====================
 \section{Projects}
+
+\begin{joblong}{AI Agent for Administrative Document Processing (French public services)}{2026}
+\item \textbf{OpenCV} image preprocessing (denoising, \textbf{Sauvola} binarisation, deskewing), \textbf{OCR}, structured field extraction with an \textbf{LLM} (Claude API), completeness checks; \textbf{n8n} orchestration with \textbf{human-in-the-loop} validation, FastAPI, Docker.
+\item On 40 labelled documents: \textbf{97.6\%} field accuracy, \textbf{100\%} classification accuracy, OCR error reduced \textbf{90-fold} by preprocessing. \href{https://github.com/adkebaily/agent-dossiers-administratifs}{\faGithub\ Code}
+\end{joblong}
 
 \begin{joblong}{CK-AI — AI assistant on my portfolio (LLM-based agent)}{2026}
 \item Designed a bilingual conversational assistant with the \textbf{Claude API}: \textbf{system prompt}, profile provided as context, internship offer analysis.
@@ -91,18 +95,19 @@
 % ===================== SKILLS =====================
 \section{Skills}
 \begin{tabularx}{\linewidth}{@{}>{\bfseries}p{0.25\linewidth} X@{}}
-Generative AI \& agents & AI agents, prompt engineering, generative AI, LLM APIs (Claude) \\
+Generative AI \& agents & AI agents, prompt engineering, Claude API, structured outputs, n8n, FastAPI \\
+Image processing & OpenCV, OCR (Tesseract), denoising, binarisation, evaluation (CER, F1) \\
 Machine learning \& vision & PyTorch, TensorFlow, scikit-learn, Vision Transformer, transfer learning, Kaggle, Google Colab \\
 Programming & Python, C, C++, Java, JavaScript, PHP, SQL (Oracle), HTML/CSS \\
 Development & Spring Boot, React, Node.js, Flutter, REST APIs \\
-Tools \& methods & Git/GitHub, Linux (Ubuntu), Windows Server, VS Code; Agile, code reviews, unit testing \\
+Tools \& methods & Docker, PostgreSQL, Git/GitHub, Linux (Ubuntu), Windows Server, VS Code; Agile, code reviews, unit testing \\
 Languages & Arabic (native), French (B2), English (B2) \\
 \end{tabularx}
 
 % ===================== ACTIVITIES =====================
 \section{Student Activities and Training}
 \begin{tabularx}{\linewidth}{@{}p{0.18\linewidth} X@{}}
-2024 -- 2026 & \textbf{DevUp Club, University of Boumerdès} — co-manager of the Visual Department (2025--2026), member of the Development Department (2024--2025) \\
+2024 -- 2026 & \textbf{DevUp Club, University of Boumerdès} — co-manager of the Visual Department (2025--2026), Development member (2024--2025) \\
 Feb. 2025 & \textbf{``AI to Fullstack'' Bootcamp} — DevUp Club (grade: Very Good) \\
 \end{tabularx}
 

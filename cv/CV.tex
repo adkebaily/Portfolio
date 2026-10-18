@@ -3,7 +3,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{lmodern}
-\usepackage[scale=0.92]{geometry}
+\usepackage[scale=0.93]{geometry}
 \usepackage{parskip}
 \usepackage{tabularx}
 \usepackage{enumitem}
@@ -17,9 +17,9 @@
 \hypersetup{colorlinks=true,urlcolor=linkcolour,linkcolor=linkcolour}
 \newcolumntype{C}{>{\centering\arraybackslash}X}
 \titleformat{\section}{\large\bfseries\raggedright}{}{0em}{}[\titlerule]
-\titlespacing{\section}{0pt}{6pt}{4pt}
+\titlespacing{\section}{0pt}{4pt}{3pt}
 \setlength{\parindent}{0pt}
-\setlist[itemize]{nosep,leftmargin=1.2em,itemsep=1.5pt,topsep=1pt,label=--}
+\setlist[itemize]{nosep,leftmargin=1.2em,itemsep=0.5pt,topsep=0pt,label=--}
 
 % Bloc expérience / projet : titre à gauche, dates à droite, puis puces
 \newenvironment{joblong}[2]
@@ -48,7 +48,7 @@
 
 % ===================== PROFIL =====================
 \section{Profil}
-Étudiant en \textbf{Master 1 Traitement du signal et des images} à l'Université du Littoral Côte d'Opale, orienté vers l'\textbf{ingénierie IA} : \textbf{agents IA}, \textbf{IA générative} et \textbf{prompt engineering}. Conception de CK-AI, un assistant basé sur un LLM intégré à mon portfolio, et de projets de classification (détection de phishing avec scikit-learn, reconnaissance de 90 espèces animales par \textbf{Vision Transformer} sous PyTorch). Deux stages chez \textbf{Ooredoo Algérie} en développement web (Spring Boot, React, SQL/Oracle) et mobile (Flutter), en méthode Agile. Recherche un stage en agents IA et IA générative.
+Étudiant en \textbf{Master 1 Traitement du signal et des images} à l'Université du Littoral Côte d'Opale, orienté vers l'\textbf{ingénierie IA} : \textbf{agents IA}, \textbf{IA générative} et \textbf{prompt engineering}. Conception d'un \textbf{agent IA de traitement de dossiers administratifs} (OCR, LLM, n8n), de CK-AI, assistant LLM de mon portfolio, et de projets de classification (phishing, \textbf{Vision Transformer}). Deux stages chez \textbf{Ooredoo Algérie} en développement web (Spring Boot, React, SQL/Oracle) et mobile (Flutter), en méthode Agile. Recherche un stage en agents IA et IA générative.
 
 % ===================== FORMATION =====================
 \section{Formation}
@@ -62,18 +62,22 @@
 \section{Expériences professionnelles}
 
 \begin{joblong}{Stagiaire développement mobile — Ooredoo Algérie}{Déc. 2024 -- Janv. 2025}
-\item Développement d'applications mobiles multiplateformes avec \textbf{Flutter}, sur tout le cycle \textbf{Agile} (analyse, développement, tests, revue).
-\item Découverte de l'infrastructure datacenter et des architectures \textbf{cloud hybrides} (GCP et on-premise).
+\item Applications mobiles multiplateformes en \textbf{Flutter} sur tout le cycle \textbf{Agile} ; découverte du datacenter et du \textbf{cloud hybride}.
 \end{joblong}
 
 \begin{joblong}{Stagiaire développement web — Ooredoo Algérie}{Déc. 2023 -- Janv. 2024}
-\item Développement de l'application web de gestion des flux de trésorerie des terminaux de paiement (POS) avec \textbf{Spring Boot} et \textbf{React}.
+\item Application web de gestion des flux de trésorerie des terminaux de paiement (POS) en \textbf{Spring Boot} et \textbf{React}.
 \item Analyse et exploitation des données par requêtes \textbf{SQL} ; maintenance et optimisation de bases \textbf{Oracle}.
 \item Intégration d'évolutions fonctionnelles, \textbf{tests unitaires}, documentation technique, revues de code et versioning Git.
 \end{joblong}
 
 % ===================== PROJETS =====================
 \section{Projets}
+
+\begin{joblong}{Agent IA de traitement de dossiers administratifs (CAF, CROUS, mairies)}{2026}
+\item Prétraitement d'images \textbf{OpenCV} (débruitage, binarisation de \textbf{Sauvola}, redressement), \textbf{OCR}, extraction structurée des champs par \textbf{LLM} (API Claude), contrôle de complétude ; orchestration \textbf{n8n} avec \textbf{validation humaine}, FastAPI, Docker.
+\item Sur 40 documents annotés : \textbf{97,6~\%} d'exactitude des champs, \textbf{100~\%} de classification, erreur OCR divisée par \textbf{90} par le prétraitement. \href{https://github.com/adkebaily/agent-dossiers-administratifs}{\faGithub\ Code}
+\end{joblong}
 
 \begin{joblong}{CK-AI — Assistant IA de mon portfolio (agent basé sur un LLM)}{2026}
 \item Conception d'un assistant conversationnel bilingue avec l'\textbf{API Claude} : \textbf{prompt système}, profil fourni comme contexte, analyse d'offres de stage.
@@ -91,18 +95,19 @@
 % ===================== COMPÉTENCES =====================
 \section{Compétences}
 \begin{tabularx}{\linewidth}{@{}>{\bfseries}p{0.25\linewidth} X@{}}
-IA générative \& agents & Agents IA, prompt engineering, IA générative, API de LLM (Claude) \\
-Machine learning \& vision & PyTorch, TensorFlow, scikit-learn, Vision Transformer, transfer learning, Kaggle, Google Colab \\
+IA générative \& agents & Agents IA, prompt engineering, API Claude, sorties structurées, n8n, FastAPI \\
+Traitement d'images & OpenCV, OCR (Tesseract), débruitage, binarisation, évaluation (CER, F1) \\
+Machine learning \& vision & PyTorch, TensorFlow, scikit-learn, Vision Transformer, transfer learning, Kaggle, Colab \\
 Langages & Python, C, C++, Java, JavaScript, PHP, SQL (Oracle), HTML/CSS \\
 Développement & Spring Boot, React, Node.js, Flutter, API REST \\
-Outils \& méthodes & Git/GitHub, Linux (Ubuntu), Windows Server, VS Code ; Agile, revues de code, tests unitaires \\
+Outils \& méthodes & Docker, PostgreSQL, Git/GitHub, Linux, Windows Server ; Agile, revues de code, tests unitaires \\
 Langues & Arabe (natif), français (B2), anglais (B2) \\
 \end{tabularx}
 
 % ===================== ACTIVITÉS =====================
 \section{Activités associatives et formations}
 \begin{tabularx}{\linewidth}{@{}p{0.18\linewidth} X@{}}
-2024 -- 2026 & \textbf{DevUp Club, Université de Boumerdès} — co-manager du département Visual (2025--2026), membre du département Développement (2024--2025) \\
+2024 -- 2026 & \textbf{DevUp Club, Université de Boumerdès} — co-manager du département Visual (2025--2026), membre Développement (2024--2025) \\
 Févr. 2025 & \textbf{Bootcamp « AI to Fullstack »} — DevUp Club (mention Très bien) \\
 \end{tabularx}
 
