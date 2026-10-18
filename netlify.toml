@@ -1,6 +1,12 @@
-# Site statique : aucune commande de build, on publie ce dossier tel quel.
+# Site statique dans public/ + fonction serverless pour l'assistant CK-AI.
+# Aucune étape de build : les pages HTML sont générées en local avec `python3 src/build.py`.
 [build]
-  publish = "."
+  publish = "public"
+  command = ""
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
 
 [[headers]]
   for = "/*"
@@ -8,3 +14,9 @@
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"

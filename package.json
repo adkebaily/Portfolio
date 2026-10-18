@@ -1,0 +1,12 @@
+{
+  "name": "chemseddine-kebaily-portfolio",
+  "private": true,
+  "type": "module",
+  "description": "Portfolio de Chems Eddine Adel KEBAILY avec l'assistant CK-AI",
+  "scripts": {
+    "build": "python3 src/build.py"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.135.0"
+  }
+}
