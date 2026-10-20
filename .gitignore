@@ -5,6 +5,3 @@ node_modules/
 *.out
 cv/private.tex
 cv/out/
-
-# QR codes de la carte (contiennent le lien secret)
-card/qr/

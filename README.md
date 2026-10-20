@@ -63,14 +63,3 @@ Sources : `cv/CV.tex` et `cv/CV_en.tex`. Compilation : `sh cv/build.sh`.
 \newcommand{\cvaddress}{N° et rue, code postal Ville}
 \newcommand{\cvphone}{\href{tel:+33...}{\faMobile\ +33 ...}}
 ```
-
-## Carte de visite numérique (QR code)
-
-Page privée servie par `netlify/functions/card.mjs` sur `/c/<CARD_TOKEN>` : seul le lien du QR code l'ouvre, toute autre adresse renvoie 404.
-Le jeton et le numéro de téléphone ne sont **pas** dans le dépôt (public) :
-
-1. Netlify → **Project configuration → Environment variables** → ajouter `CARD_TOKEN` (le jeton secret) et `CARD_PHONE` (ex. `+33 6 12 34 56 78`).
-2. Redéployer (Deploys → Trigger deploy).
-3. Modifier la carte : `card/template.html`, puis `python3 card/build.py`, commit + push.
-4. Nouveau QR code : `python3 card/make_qr.py https://chemseddine-kebaily.netlify.app/c/<CARD_TOKEN>` (dossier `card/qr/`, ignoré par git).
-   Changer `CARD_TOKEN` désactive l'ancien QR code.
