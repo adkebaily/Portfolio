@@ -41,7 +41,7 @@ body {
 }
 h1, h2, h3 { margin: 0; }
 h2 { font: 700 clamp(1.8rem, 3.6vw, 2.6rem)/1.1 "Bricolage Grotesque", sans-serif; letter-spacing: -.02em; }
-h3 { font: 600 1.08rem/1.35 "IBM Plex Sans", sans-serif; }
+h3 { font: 700 1.35rem/1.25 "Bricolage Grotesque", sans-serif; letter-spacing: -.01em; }
 a { color: var(--accent); }
 img { max-width: 100%; display: block; }
 .wrap { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 20px; }
@@ -219,7 +219,7 @@ img { max-width: 100%; display: block; }
 .result:last-child { border-bottom: 1px solid var(--line); }
 .metric { margin: 0; font: 700 2.1rem/1 "Bricolage Grotesque", sans-serif; letter-spacing: -.02em; }
 .metric small { display: block; margin-top: 8px; font: 400 .82rem/1.4 "IBM Plex Sans", sans-serif; letter-spacing: 0; color: var(--ink-soft); }
-.result h3 { display: flex; align-items: baseline; gap: 10px; font-size: 1.15rem; }
+.result h3 { display: flex; align-items: baseline; gap: 10px; }
 .result h3::before { content: ""; flex: none; width: 11px; height: 11px; border-radius: 2px; background: var(--c); transform: translateY(1px); }
 :root[data-theme="dark"] .result h3::before { box-shadow: 0 0 0 1px var(--line); }
 .result .ctx { margin: 4px 0 10px; color: var(--ink-soft); font-size: .88rem; }
