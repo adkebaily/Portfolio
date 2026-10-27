@@ -97,6 +97,7 @@
   }));
 
   // ---------- Assistant CK-AI ----------
+  const contact = $("#contactForm"), formStatus = $("#formStatus");
   const body = $("#chatBody"), form = $("#chatForm"), input = $("#chatInput");
   const sendBtn = form.querySelector(".send"), status = $("#chatStatus");
   const offerPanel = $("#offerPanel"), offerText = $("#offerText");
@@ -126,16 +127,68 @@
     status.querySelector("span").textContent = T.demo;
   };
 
+  // ---------- Actions de l'agent sur la page ----------
+  const flash = el => {
+    el.classList.remove("flash");
+    void el.offsetWidth;          // relance l'animation
+    el.classList.add("flash");
+  };
+  const showSection = id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+    flash(el.querySelector(".section-head") || el);
+  };
+  const openProject = name => {
+    const tab = document.querySelector(`.tabs button[data-tab="${name === "animals" ? 1 : 0}"]`);
+    if (tab) tab.click();
+    showSection("projets");
+  };
+  const prefillContact = a => {
+    contact.elements.objet.value = a.subject || "";
+    contact.elements.message.value = a.message || "";
+    if (a.organisation) contact.elements.organisation.value = a.organisation;
+    formStatus.className = "form-status ok";
+    formStatus.textContent = T.prefilled;
+    showSection("contact");
+    flash(contact);
+  };
+  // Exécute les actions renvoyées par l'agent ; renvoie le HTML à ajouter sous la réponse.
+  const runActions = actions => {
+    let extra = "";
+    for (const a of actions || []) {
+      if (a.type === "show_section") showSection(a.section);
+      else if (a.type === "open_project") openProject(a.project);
+      else if (a.type === "prefill_contact_form") prefillContact(a);
+      else if (a.type === "offer_cv") {
+        const file = a.language === "en" ? "CV_Kebaily_EN.pdf" : "CV_Kebaily.pdf";
+        const base = lang === "en" ? "../" : "";
+        extra += `<a class="chat-cta" href="${base}${file}" download>⬇ ${a.language === "en" ? T.cv_en : T.cv_fr}</a>`;
+      }
+    }
+    return extra;
+  };
+  // Étapes de l'agent (outils utilisés), affichées au-dessus de la réponse
+  const stepsHtml = steps => {
+    if (!steps || !steps.length) return "";
+    const items = steps.map(s => {
+      const label = T.steps[s.tool] || s.tool;
+      const detail = s.detail !== "" && s.detail !== undefined ? ` · ${T.details[s.detail] || s.detail}` : "";
+      return `<li>${escapeHtml(label + detail)}</li>`;
+    }).join("");
+    return `<ul class="agent-steps" aria-label="${T.steps_label}">${items}</ul>`;
+  };
+
   // Réponses hors ligne, utilisées tant que l'IA n'est pas configurée sur Netlify
   const localAnswer = (q, isOffer) => {
-    if (isOffer) return T.offer_demo;
+    if (isOffer) return { reply: T.offer_demo, actions: [{ type: "show_section", section: "contact" }] };
     const text = q.toLowerCase();
     let best = null, bestScore = 0;
-    for (const [keys, answer] of T.faq) {
-      const score = keys.filter(k => text.includes(k)).length;
-      if (score > bestScore) { best = answer; bestScore = score; }
+    for (const entry of T.faq) {
+      const score = entry[0].filter(k => text.includes(k)).length;
+      if (score > bestScore) { best = entry; bestScore = score; }
     }
-    return best || T.default;
+    return best ? { reply: best[1], actions: best[2] || [] } : { reply: T.default, actions: [] };
   };
 
   const ask = async (question, shown, isOffer = false) => {
@@ -145,7 +198,7 @@
     history.push({ role: "user", content: question });
     const typing = addMsg("bot typing", "<i></i><i></i><i></i>");
 
-    let reply = null;
+    let result = null;
     if (!demo) {
       try {
         const res = await fetch("/api/ask", {
@@ -154,9 +207,9 @@
           body: JSON.stringify({ lang, messages: history.slice(-10) }),
         });
         if (res.ok) {
-          reply = (await res.json()).reply;
+          result = await res.json();
         } else if (res.status === 429 || res.status === 413) {
-          reply = T.error;    // trop de questions ou message trop long
+          result = { reply: T.error };   // trop de questions ou message trop long
         } else {
           setDemo();          // fonction absente, clé API non configurée ou erreur serveur
         }
@@ -164,14 +217,15 @@
         setDemo();            // hors ligne ou aperçu local
       }
     }
-    if (reply === null) {
+    if (result === null) {
       await new Promise(r => setTimeout(r, 500));
-      reply = localAnswer(question, isOffer);
+      result = localAnswer(question, isOffer);
     }
 
     typing.remove();
-    addMsg("bot", format(reply));
-    history.push({ role: "assistant", content: reply });
+    const extra = runActions(result.actions);
+    addMsg("bot", stepsHtml(result.steps) + format(result.reply) + extra);
+    history.push({ role: "assistant", content: result.reply });
     busy = false; sendBtn.disabled = false;
   };
 
@@ -195,7 +249,6 @@
   });
 
   // ---------- Formulaire de contact (Netlify Forms) ----------
-  const contact = $("#contactForm"), formStatus = $("#formStatus");
   contact.addEventListener("submit", async e => {
     e.preventDefault();
     const btn = contact.querySelector("button[type=submit]");
