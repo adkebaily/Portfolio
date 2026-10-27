@@ -5,7 +5,8 @@
 export const SUMMARY = `
 Full name: Chems Eddine Adel Kebaily. Given names: Chems Eddine Adel. Family name: Kebaily. Refer to him as "Chems Eddine Adel".
 Master's student (M1) in Signal and Image Processing at Université du Littoral Côte d'Opale (ULCO), Calais, France (2026–2027).
-Moving into AI engineering: AI agents, generative AI and prompt engineering. Looking for an internship in this field.
+Moving into AI engineering: AI agents, generative AI and prompt engineering.
+Internship search: available from 1 April 2027, for up to 5 months, in AI, AI engineering, machine learning, deep learning, AI agents, generative AI and prompt engineering, computer vision or NLP.
 Background: Bachelor's in Computer Systems (Algeria), two internships at Ooredoo Algeria (web and mobile development), machine learning and computer vision projects.
 `.trim();
 
@@ -46,7 +47,7 @@ export const SECTIONS = {
   contact: `
 Email: chemseddine.keb@gmail.com (preferred) · LinkedIn: linkedin.com/in/chemseddineadel-keb · GitHub: github.com/adkebaily · or the contact form on the website.
 His phone number and street address are not shared on the website. Based in Calais, France. Driving licence B.
-French and English CVs can be downloaded from the website. Exact internship availability dates are not stated: suggest contacting him.`,
+French and English CVs can be downloaded from the website. Internship: available from 1 April 2027, maximum duration 5 months (end of August 2027 at the latest). Fields: AI, AI engineering, machine learning, deep learning, AI agents, generative AI and prompt engineering, computer vision or NLP. Location preferences are not stated: suggest contacting him.`,
 };
 
 // Index utilisé pour comparer les exigences d'une offre au profil.
