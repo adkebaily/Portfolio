@@ -5,3 +5,4 @@ node_modules/
 *.out
 cv/private.tex
 cv/out/
+__pycache__/
