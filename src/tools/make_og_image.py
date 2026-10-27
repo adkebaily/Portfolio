@@ -1,21 +1,17 @@
 """Génère les images d'aperçu (LinkedIn, WhatsApp…) : public/assets/og-fr.jpg et og-en.jpg (1200×630).
-Même identité que le site : vitre de scanner, feuille, palette viridis.
 Usage : python3 src/tools/make_og_image.py
 """
 from pathlib import Path
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 ROOT = Path(__file__).resolve().parents[2]
 PHOTO = ROOT / "public" / "assets" / "photo.jpg"
-FONT_DIR = Path(__file__).resolve().parent / "fonts"   # polices OFL (Google Fonts)
+FONT_DIR = Path("/usr/share/fonts/opentype/inter")
 W, H = 1200, 630
-GLASS, PAPER, LINE = (238, 242, 241), (251, 252, 251), (204, 214, 211)
-INK, SOFT, FAM = (29, 43, 54), (75, 90, 100), (68, 1, 84)
-VIRIDIS = [(68, 1, 84), (59, 82, 139), (33, 145, 140), (94, 201, 98), (253, 231, 37)]
 
 TEXTS = {
-    "fr": ("Ingénierie IA, agents IA, IA générative", "Stage dès le 1er avril 2027, 5 mois max."),
-    "en": ("AI engineering, AI agents, generative AI", "Internship from 1 April 2027, up to 5 months"),
+    "fr": ("Ingénierie IA · Agents IA · IA générative", "Master 1 Traitement du signal et des images — ULCO"),
+    "en": ("AI Engineering · AI Agents · Generative AI", "Master's in Signal and Image Processing — ULCO"),
 }
 
 
@@ -23,52 +19,64 @@ def font(name, size):
     return ImageFont.truetype(str(FONT_DIR / name), size)
 
 
-def viridis(t):
-    t = min(max(t, 0), 1) * (len(VIRIDIS) - 1)
-    i = min(int(t), len(VIRIDIS) - 2)
-    k = t - i
-    return tuple(round(VIRIDIS[i][c] + (VIRIDIS[i + 1][c] - VIRIDIS[i][c]) * k) for c in range(3))
+def background():
+    # dégradé indigo → violet → cyan, comme le site
+    img = Image.new("RGB", (W, H))
+    stops = [(0.0, (49, 46, 129)), (0.55, (79, 70, 229)), (1.0, (8, 145, 178))]
+    px = img.load()
+    for x in range(W):
+        for y in range(H):
+            t = min(1, max(0, (x / W) * 0.75 + (y / H) * 0.25))
+            for (a, ca), (b, cb) in zip(stops, stops[1:]):
+                if a <= t <= b:
+                    k = (t - a) / (b - a)
+                    px[x, y] = tuple(round(ca[i] + (cb[i] - ca[i]) * k) for i in range(3))
+                    break
+    # grille légère
+    d = ImageDraw.Draw(img, "RGBA")
+    for x in range(0, W, 48):
+        d.line([(x, 0), (x, H)], fill=(255, 255, 255, 14))
+    for y in range(0, H, 48):
+        d.line([(0, y), (W, y)], fill=(255, 255, 255, 14))
+    return img
 
 
-def id_photo(w, h):
+def round_photo(size):
     src = Image.open(PHOTO).convert("RGB")
-    sw, sh = src.size
-    cw = min(sw, round(sh * w / h))
-    ch = round(cw * h / w)
-    top = int((sh - ch) * 0.25)
-    return src.crop(((sw - cw) // 2, top, (sw - cw) // 2 + cw, top + ch)).resize((w, h), Image.LANCZOS)
+    w, h = src.size
+    side = min(w, h)
+    top = int((h - side) * 0.25)          # garder le visage
+    src = src.crop(((w - side) // 2, top, (w - side) // 2 + side, top + side)).resize((size, size), Image.LANCZOS)
+    mask = Image.new("L", (size * 4, size * 4), 0)
+    ImageDraw.Draw(mask).ellipse((0, 0, size * 4, size * 4), fill=255)
+    out = Image.new("RGBA", (size, size))
+    out.paste(src, (0, 0), mask.resize((size, size), Image.LANCZOS))
+    return out
 
 
 def make(lang):
-    img = Image.new("RGB", (W, H), GLASS)
+    img = background().convert("RGBA")
+    size = 300
+    ring = Image.new("RGBA", (size + 24, size + 24), (0, 0, 0, 0))
+    ImageDraw.Draw(ring).ellipse((0, 0, size + 23, size + 23), fill=(255, 255, 255, 235))
+    shadow = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    ImageDraw.Draw(shadow).ellipse((828, 178, 828 + size + 24, 178 + size + 24), fill=(10, 10, 40, 110))
+    img = Image.alpha_composite(img, shadow.filter(ImageFilter.GaussianBlur(22)))
+    img.alpha_composite(ring, (820, 160))
+    img.alpha_composite(round_photo(size), (832, 172))
+
     d = ImageDraw.Draw(img)
-    # feuille posée sur la vitre, avec repères de cadrage
-    sx, sy, ex, ey = 60, 120, 800, 470
-    d.rectangle((sx, sy, ex, ey), fill=PAPER, outline=LINE)
-    for (x, y, dx, dy) in [(sx - 10, sy - 10, 1, 1), (ex + 10, ey + 10, -1, -1)]:
-        d.line([(x, y), (x + 22 * dx, y)], fill=VIRIDIS[2], width=3)
-        d.line([(x, y), (x, y + 22 * dy)], fill=VIRIDIS[2], width=3)
-    big = font("BricolageGrotesque-ExtraBold.ttf", 74)
-    d.text((sx + 44, sy + 40), "Chems Eddine Adel", font=big, fill=INK)
-    d.text((sx + 44, sy + 122), "Kebaily", font=big, fill=FAM)
-    d.text((sx + 46, sy + 250), TEXTS[lang][0], font=font("IBMPlexSans-SemiBold.ttf", 28), fill=SOFT)
-    # photo d'identité avec décalage viridis
-    pw, ph = 250, 312
-    px, py = 880, 120
-    d.rectangle((px + 10, py + 10, px + pw + 10, py + ph + 10), fill=VIRIDIS[2])
-    d.rectangle((px - 4, py - 4, px + pw + 4, py + ph + 4), fill=PAPER, outline=LINE)
-    img.paste(id_photo(pw, ph), (px, py))
-    # disponibilité et adresse du site
-    tag = font("IBMPlexSans-SemiBold.ttf", 24)
-    text = TEXTS[lang][1]
-    tw = d.textlength(text, font=tag)
-    d.rectangle((sx, 515, sx + tw + 28, 557), fill=VIRIDIS[4])
-    d.text((sx + 14, 536), text, font=tag, fill=INK, anchor="lm")
-    d.text((1140, 536), "chemseddine-kebaily.netlify.app", font=font("IBMPlexSans-Medium.ttf", 22), fill=SOFT, anchor="rm")
-    for x in range(W):
-        d.line([(x, H - 14), (x, H)], fill=viridis(x / (W - 1)))
+    x = 80
+    d.rounded_rectangle((x, 92, x + 70, 162), radius=20, fill=(255, 255, 255))
+    d.text((x + 35, 127), "CK", font=font("Inter-ExtraBold.otf", 30), fill=(79, 70, 229), anchor="mm")
+    d.text((x, 205), "Chems Eddine Adel", font=font("Inter-ExtraBold.otf", 62), fill="white")
+    d.text((x, 280), "Kebaily", font=font("Inter-ExtraBold.otf", 62), fill=(165, 243, 252))
+    line1, line2 = TEXTS[lang]
+    d.text((x, 385), line1, font=font("Inter-SemiBold.otf", 30), fill="white")
+    d.text((x, 432), line2, font=font("Inter-Medium.otf", 24), fill=(224, 231, 255))
+    d.text((x, 530), "chemseddine-kebaily.netlify.app", font=font("Inter-SemiBold.otf", 24), fill=(253, 230, 138))
     out = ROOT / "public" / "assets" / f"og-{lang}.jpg"
-    img.save(out, quality=90, optimize=True, progressive=True)
+    img.convert("RGB").save(out, quality=88, optimize=True, progressive=True)
     print("wrote", out.relative_to(ROOT))
 
 

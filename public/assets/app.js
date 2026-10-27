@@ -28,90 +28,73 @@
   });
   links.querySelectorAll("a").forEach(a => a.addEventListener("click", () => links.classList.remove("open")));
 
-  // ---------- Nav au défilement ----------
-  const nav = $("#nav");
-  const onScroll = () => nav.classList.toggle("scrolled", scrollY > 10);
+  // ---------- Défilement : barre de progression, nav, bouton haut ----------
+  const nav = $("#nav"), progress = $("#progress"), toTop = $("#toTop");
+  const onScroll = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    progress.style.width = (max > 0 ? (scrollY / max) * 100 : 0) + "%";
+    nav.classList.toggle("scrolled", scrollY > 10);
+    toTop.classList.toggle("show", scrollY > 700);
+  };
   addEventListener("scroll", onScroll, { passive: true });
   onScroll();
+
+  // ---------- Apparition au défilement + compteurs ----------
+  const countUp = el => {
+    const target = +el.dataset.count;
+    if (reduceMotion) return;
+    const start = performance.now();
+    (function step(t) {
+      const p = Math.min((t - start) / 1200, 1);
+      el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(step);
+    })(start);
+  };
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add("visible");
+      e.target.querySelectorAll("[data-count]").forEach(countUp);
+      revealObs.unobserve(e.target);
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll(".reveal").forEach((el, i) => {
+    el.style.transitionDelay = (i % 3) * 90 + "ms";
+    revealObs.observe(el);
+  });
 
   // ---------- Lien actif dans le menu ----------
   const navMap = new Map([...links.querySelectorAll("a")].map(a => [a.hash.slice(1), a]));
   const sectionObs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (!e.isIntersecting) return;
-      navMap.forEach(a => { a.classList.remove("active"); a.removeAttribute("aria-current"); });
-      const a = navMap.get(e.target.id);
-      if (a) { a.classList.add("active"); a.setAttribute("aria-current", "true"); }
+      navMap.forEach(a => a.classList.remove("active"));
+      navMap.get(e.target.id)?.classList.add("active");
     });
   }, { rootMargin: "-45% 0px -50% 0px" });
   document.querySelectorAll("main section[id]").forEach(s => sectionObs.observe(s));
 
-  // ---------- Scan du nom : bruit, débruitage, binarisation, redressement ----------
-  // Une seule animation au chargement, qui reprend les étapes réelles du pipeline documents.
-  (() => {
-    const sheet = $("#sheet"), canvas = $("#scan");
-    if (!sheet || !canvas) return;
-    const stages = [...document.querySelectorAll("#stages li")];
-    const finish = () => { stages.forEach(s => s.classList.add("on")); sheet.classList.add("done"); };
-    if (reduceMotion) return finish();
+  // ---------- Mot animé du titre ----------
+  const word = $("#rotating");
+  if (!reduceMotion) {
+    let w = 0;
+    setInterval(() => {
+      word.classList.add("out");
+      setTimeout(() => {
+        w = (w + 1) % T.words.length;
+        word.textContent = T.words[w];
+        word.classList.remove("out");
+      }, 350);
+    }, 2600);
+  }
 
-    const W = canvas.width, H = canvas.height;
-    const ctx = canvas.getContext("2d", { willReadFrequently: true });
-    const off = document.createElement("canvas"); off.width = W; off.height = H;
-    const o = off.getContext("2d");
-    const draw = () => {
-      const size = Math.round(W * 0.106);
-      o.fillStyle = "#fff"; o.fillRect(0, 0, W, H);
-      o.fillStyle = "#000"; o.textBaseline = "top";
-      o.font = `800 ${size}px "Bricolage Grotesque", sans-serif`;
-      o.fontVariationSettings = "'opsz' 96";
-      o.fillText("Chems Eddine Adel", 0, W * 0.024);
-      o.fillText("Kebaily", 0, W * 0.024 + size * 0.98);
-      return o.getImageData(0, 0, W, H).data;
-    };
-    const isDark = () => root.dataset.theme
-      ? root.dataset.theme === "dark"
-      : matchMedia("(prefers-color-scheme: dark)").matches;
-
-    document.fonts.ready.then(() => {
-      const clean = draw();
-      const noise = new Float32Array(W * H).map(() => (Math.random() - 0.5) * 2);
-      const speck = new Uint8Array(W * H).map(() => (Math.random() < 0.012 ? 1 : 0));
-      const img = ctx.createImageData(W, H);
-      const dark = isDark();
-      const ink = dark ? [232, 238, 236] : [29, 43, 54], bg = dark ? [22, 33, 42] : [251, 252, 251];
-      const tmp = document.createElement("canvas"); tmp.width = W; tmp.height = H;
-      const tctx = tmp.getContext("2d");
-      const DUR = Number(new URLSearchParams(location.search).get("dur")) || 2600;
-      const start = performance.now();
-
-      const frame = now => {
-        const t = Math.min((now - start) / DUR, 1);
-        const amp = 160 * Math.max(0, 1 - t / 0.55);      // le bruit diminue (débruitage)
-        const binar = t > 0.55;                            // seuillage à partir de 55 %
-        const skew = 0.035 * Math.max(0, 1 - t / 0.75);    // redressement progressif
-        stages.forEach((s, i) => s.classList.toggle("on", t >= [0, 0.2, 0.55, 0.9][i]));
-
-        const d = img.data;
-        for (let i = 0, p = 0; i < W * H; i++, p += 4) {
-          let v = clean[p] + noise[i] * amp + (speck[i] && !binar ? -200 : 0) - (1 - t) * 30;
-          if (binar) v = v > 128 ? 255 : 0;
-          const k = Math.min(1, Math.max(0, v / 255));      // 0 = encre, 1 = papier
-          d[p] = ink[0] + (bg[0] - ink[0]) * k;
-          d[p + 1] = ink[1] + (bg[1] - ink[1]) * k;
-          d[p + 2] = ink[2] + (bg[2] - ink[2]) * k;
-          d[p + 3] = 255;
-        }
-        tctx.putImageData(img, 0, 0);
-        ctx.setTransform(1, 0, 0, 1, 0, 0);
-        ctx.fillStyle = `rgb(${bg})`; ctx.fillRect(0, 0, W, H);
-        ctx.setTransform(1, skew, 0, 1, 0, -skew * W * 0.3);
-        ctx.drawImage(tmp, 0, 0);
-        if (t < 1) requestAnimationFrame(frame); else setTimeout(finish, 250);
-      };
-      requestAnimationFrame(frame);
-    });
-  })();
+  // ---------- Onglets des projets ----------
+  const tabs = document.querySelectorAll(".tabs button");
+  tabs.forEach(tab => tab.addEventListener("click", () => {
+    const id = tab.dataset.tab;
+    tabs.forEach(t => { t.classList.toggle("on", t === tab); t.setAttribute("aria-selected", t === tab); });
+    document.querySelectorAll("[data-project]").forEach(el => { el.hidden = el.dataset.project !== id; });
+  }));
 
   // ---------- Assistant CK-AI ----------
   const contact = $("#contactForm"), formStatus = $("#formStatus");
@@ -131,7 +114,7 @@
   const addMsg = (who, html) => {
     const el = document.createElement("div");
     el.className = "msg " + who;
-    el.innerHTML = `<div class="bubble">${html}</div>`;
+    el.innerHTML = (who === "bot" ? '<span class="avatar sm">CK</span>' : "") + `<div class="bubble">${html}</div>`;
     body.appendChild(el);
     body.scrollTop = body.scrollHeight;
     return el;
@@ -154,13 +137,12 @@
     const el = document.getElementById(id);
     if (!el) return;
     el.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
-    flash(el.querySelector(".sec-head, .col-head") || el);
+    flash(el.querySelector(".section-head") || el);
   };
   const openProject = name => {
-    const el = document.getElementById("p-" + name);
-    if (!el) return showSection("projets");
-    el.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
-    flash(el);
+    const tab = document.querySelector(`.tabs button[data-tab="${({ documents: 2, ckai: 3, phishing: 0, animals: 1 })[name] ?? 0}"]`);
+    if (tab) tab.click();
+    showSection("projets");
   };
   const prefillContact = a => {
     contact.elements.objet.value = a.subject || "";
@@ -289,6 +271,10 @@
     }
     btn.disabled = false;
   });
+
+  // ---------- Bandeau défilant : contenu doublé pour une boucle continue ----------
+  const track = $(".marquee-track");
+  track.innerHTML += track.innerHTML;
 
   $("#year").textContent = new Date().getFullYear();
 })();
