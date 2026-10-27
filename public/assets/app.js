@@ -182,6 +182,8 @@
   // Réponses hors ligne, utilisées tant que l'IA n'est pas configurée sur Netlify
   const localAnswer = (q, isOffer) => {
     if (isOffer) return { reply: T.offer_demo, actions: [{ type: "show_section", section: "contact" }] };
+    const aud = Object.values(T.aud).find(a => a.q === q);
+    if (aud) return aud;
     const text = q.toLowerCase();
     let best = null, bestScore = 0;
     for (const entry of T.faq) {
@@ -238,6 +240,11 @@
   $("#suggestions").addEventListener("click", e => {
     if (e.target.tagName === "BUTTON") ask(e.target.textContent);
   });
+  // « Recruteur » / « Enseignant » dans le titre : CK-AI répond selon le visiteur
+  document.querySelectorAll(".aud").forEach(btn => btn.addEventListener("click", () => {
+    $("#assistant").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+    setTimeout(() => ask(T.aud[btn.dataset.aud].q), reduceMotion ? 0 : 500);
+  }));
   $("#offerBtn").addEventListener("click", () => { offerPanel.hidden = !offerPanel.hidden; if (!offerPanel.hidden) offerText.focus(); });
   $("#offerCancel").addEventListener("click", () => { offerPanel.hidden = true; });
   $("#offerSend").addEventListener("click", () => {
