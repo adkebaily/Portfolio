@@ -74,18 +74,136 @@
   }, { rootMargin: "-45% 0px -50% 0px" });
   document.querySelectorAll("main section[id]").forEach(s => sectionObs.observe(s));
 
-  // ---------- Mot animé du titre ----------
+  // ---------- Mot du titre : effacé puis réécrit jeton par jeton, comme un LLM ----------
   const word = $("#rotating");
   if (!reduceMotion) {
     let w = 0;
-    setInterval(() => {
-      word.classList.add("out");
-      setTimeout(() => {
+    word.classList.add("typing-on");
+    const wait = ms => new Promise(r => setTimeout(r, ms));
+    (async function loop() {
+      for (;;) {
+        await wait(2400);
+        for (let t = word.textContent; t.length; t = t.slice(0, -1)) { word.textContent = t.slice(0, -1); await wait(38); }
         w = (w + 1) % T.words.length;
-        word.textContent = T.words[w];
-        word.classList.remove("out");
-      }, 350);
-    }, 2600);
+        const next = T.words[w];
+        // découpe en petits « jetons » de 1 à 3 caractères
+        for (let i = 0; i < next.length;) {
+          i += 1 + Math.floor(Math.random() * 3);
+          word.textContent = next.slice(0, i);
+          await wait(70 + Math.random() * 60);
+        }
+      }
+    })();
+  }
+
+  // ---------- Hero : réseau d'agents qui échangent des messages ----------
+  (() => {
+    const canvas = $("#net");
+    if (!canvas || reduceMotion) return;
+    const ctx = canvas.getContext("2d");
+    const hero = canvas.parentElement;
+    const fine = matchMedia("(hover: hover) and (pointer: fine)").matches;
+    let W = 0, H = 0, nodes = [], packets = [], running = false, raf = 0;
+    const mouse = { x: -1e4, y: -1e4 };
+    let c1 = "79,70,229", c2 = "6,182,212";
+    const readColors = () => {
+      const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+      c1 = dark ? "129,140,248" : "79,70,229";
+      c2 = dark ? "34,211,238" : "6,182,212";
+    };
+    const resize = () => {
+      const dpr = Math.min(devicePixelRatio || 1, 2);
+      W = hero.clientWidth; H = hero.clientHeight;
+      canvas.width = W * dpr; canvas.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const n = Math.min(70, Math.round(W * H / (fine ? 16000 : 26000)));
+      nodes = Array.from({ length: n }, () => ({
+        x: Math.random() * W, y: Math.random() * H,
+        vx: (Math.random() - .5) * .25, vy: (Math.random() - .5) * .25, r: 1.2 + Math.random() * 1.8
+      }));
+      packets = [];
+    };
+    const LINK = 140;
+    const frame = () => {
+      ctx.clearRect(0, 0, W, H);
+      for (const p of nodes) {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > W) p.vx *= -1;
+        if (p.y < 0 || p.y > H) p.vy *= -1;
+      }
+      // liens entre agents proches
+      for (let i = 0; i < nodes.length; i++) {
+        const a = nodes[i];
+        for (let j = i + 1; j < nodes.length; j++) {
+          const b = nodes[j], dx = a.x - b.x, dy = a.y - b.y, d = Math.hypot(dx, dy);
+          if (d < LINK) {
+            ctx.strokeStyle = `rgba(${c1},${(1 - d / LINK) * .22})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+            if (packets.length < 14 && Math.random() < .0009) packets.push({ a, b, t: 0 });
+          }
+        }
+        // le pointeur agit comme un agent « orchestrateur »
+        const dm = Math.hypot(a.x - mouse.x, a.y - mouse.y);
+        if (dm < 190) {
+          ctx.strokeStyle = `rgba(${c2},${(1 - dm / 190) * .55})`;
+          ctx.beginPath(); ctx.moveTo(mouse.x, mouse.y); ctx.lineTo(a.x, a.y); ctx.stroke();
+        }
+        ctx.fillStyle = dm < 190 ? `rgba(${c2},.9)` : `rgba(${c1},.55)`;
+        ctx.beginPath(); ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2); ctx.fill();
+      }
+      // messages qui circulent le long des liens
+      packets = packets.filter(k => (k.t += .018) < 1);
+      for (const k of packets) {
+        const x = k.a.x + (k.b.x - k.a.x) * k.t, y = k.a.y + (k.b.y - k.a.y) * k.t;
+        ctx.fillStyle = `rgba(${c2},.95)`;
+        ctx.shadowColor = `rgba(${c2},.9)`; ctx.shadowBlur = 8;
+        ctx.beginPath(); ctx.arc(x, y, 2.2, 0, Math.PI * 2); ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+      raf = requestAnimationFrame(frame);
+    };
+    const start = () => { if (!running && !document.hidden) { running = true; raf = requestAnimationFrame(frame); } };
+    const stop = () => { running = false; cancelAnimationFrame(raf); };
+    readColors(); resize();
+    new IntersectionObserver(([e]) => (e.isIntersecting ? start() : stop())).observe(hero);
+    document.addEventListener("visibilitychange", () => (document.hidden ? stop() : start()));
+    new MutationObserver(readColors).observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+    let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(resize, 150); });
+    if (fine) {
+      hero.addEventListener("pointermove", e => { const r = hero.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; });
+      hero.addEventListener("pointerleave", () => { mouse.x = mouse.y = -1e4; });
+    }
+  })();
+
+  // ---------- Inclinaison 3D de la photo et liseré lumineux des cartes ----------
+  if (!reduceMotion && matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    const visual = $(".hero-visual");
+    let tx = 0, ty = 0, cx = 0, cy = 0, tilting = false;
+    const tilt = () => {
+      cx += (tx - cx) * .1; cy += (ty - cy) * .1;
+      visual.style.transform = `perspective(900px) rotateX(${cy}deg) rotateY(${cx}deg)`;
+      if (Math.abs(tx - cx) > .01 || Math.abs(ty - cy) > .01) requestAnimationFrame(tilt); else tilting = false;
+    };
+    const hero = $(".hero");
+    hero.addEventListener("pointermove", e => {
+      if (visual.classList.contains("visible")) visual.style.transition = "opacity .8s";   // l'inclinaison suit sans retard
+      const r = visual.getBoundingClientRect();
+      tx = ((e.clientX - r.left) / r.width - .5) * 14;
+      ty = -((e.clientY - r.top) / r.height - .5) * 14;
+      if (!tilting) { tilting = true; requestAnimationFrame(tilt); }
+    });
+    hero.addEventListener("pointerleave", () => { tx = ty = 0; if (!tilting) { tilting = true; requestAnimationFrame(tilt); } });
+
+    const spots = document.querySelectorAll(".step, .skill, .org, .j-block, .chat, .contact-form");
+    spots.forEach(el => {
+      el.classList.add("spot");
+      el.addEventListener("pointermove", e => {
+        const r = el.getBoundingClientRect();
+        el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+        el.style.setProperty("--my", `${e.clientY - r.top}px`);
+      });
+    });
   }
 
   // ---------- Onglets des projets ----------
@@ -171,12 +289,39 @@
   // Étapes de l'agent (outils utilisés), affichées au-dessus de la réponse
   const stepsHtml = steps => {
     if (!steps || !steps.length) return "";
-    const items = steps.map(s => {
+    const items = steps.map((s, k) => {
       const label = T.steps[s.tool] || s.tool;
       const detail = s.detail !== "" && s.detail !== undefined ? ` · ${T.details[s.detail] || s.detail}` : "";
-      return `<li>${escapeHtml(label + detail)}</li>`;
+      return `<li style="--k:${k}">${escapeHtml(label + detail)}</li>`;
     }).join("");
     return `<ul class="agent-steps" aria-label="${T.steps_label}">${items}</ul>`;
+  };
+
+  // Fait apparaître la réponse mot par mot, après les étapes de l'agent
+  const streamIn = (bubble, nSteps) => {
+    const walker = document.createTreeWalker(bubble, NodeFilter.SHOW_TEXT);
+    const texts = [];
+    for (let n; (n = walker.nextNode());) if (!n.parentElement.closest(".agent-steps, .chat-cta") && n.data.trim()) texts.push(n);
+    let k = 0;
+    const words = texts.reduce((acc, n) => acc + n.data.split(/\s+/).length, 0);
+    const step = Math.max(8, Math.min(28, 1400 / words));        // au plus ~1,4 s pour toute la réponse
+    const offset = nSteps * 120 + 150;
+    for (const n of texts) {
+      const frag = document.createDocumentFragment();
+      n.data.split(/(\s+)/).forEach(part => {
+        if (!part) return;
+        if (/^\s+$/.test(part)) return frag.append(part);
+        const sp = document.createElement("span");
+        sp.className = "tok"; sp.textContent = part;
+        sp.style.animationDelay = `${offset + k++ * step}ms`;
+        frag.append(sp);
+      });
+      n.replaceWith(frag);
+    }
+    const cta = bubble.querySelector(".chat-cta");
+    if (cta) { cta.classList.add("tok"); cta.style.animationDelay = `${offset + k * step}ms`; }
+    const scroll = () => { body.scrollTop = body.scrollHeight; };
+    setTimeout(scroll, offset + k * step + 300);
   };
 
   // Réponses hors ligne, utilisées tant que l'IA n'est pas configurée sur Netlify
@@ -224,7 +369,8 @@
 
     typing.remove();
     const extra = runActions(result.actions);
-    addMsg("bot", stepsHtml(result.steps) + format(result.reply) + extra);
+    const msg = addMsg("bot", stepsHtml(result.steps) + format(result.reply) + extra);
+    if (!reduceMotion) streamIn(msg.querySelector(".bubble"), (result.steps || []).length);
     history.push({ role: "assistant", content: result.reply });
     busy = false; sendBtn.disabled = false;
   };
