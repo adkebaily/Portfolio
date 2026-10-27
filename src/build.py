@@ -390,7 +390,7 @@ def seo_files(pub: Path) -> None:
     from datetime import date
     today = date.today().isoformat()
     (pub / "robots.txt").write_text(
-        f"User-agent: *\nAllow: /\nDisallow: /merci.html\nDisallow: /en/merci.html\nDisallow: /concept/\n\nSitemap: {SITE}/sitemap.xml\n",
+        f"User-agent: *\nAllow: /\nDisallow: /merci.html\nDisallow: /en/merci.html\n\nSitemap: {SITE}/sitemap.xml\n",
         encoding="utf-8")
     alts = (f'    <xhtml:link rel="alternate" hreflang="fr" href="{SITE}/"/>\n'
             f'    <xhtml:link rel="alternate" hreflang="en" href="{SITE}/en/"/>\n'

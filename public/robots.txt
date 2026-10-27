@@ -2,6 +2,5 @@ User-agent: *
 Allow: /
 Disallow: /merci.html
 Disallow: /en/merci.html
-Disallow: /concept/
 
 Sitemap: https://chemseddine-kebaily.netlify.app/sitemap.xml
