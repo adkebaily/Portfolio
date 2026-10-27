@@ -12,14 +12,54 @@ ROOT = Path(__file__).resolve().parent.parent
 TEMPLATE = (ROOT / "src" / "template.html").read_text(encoding="utf-8")
 
 PATCHES = "".join("<i></i>" for _ in range(36))
+SITE = "https://chemseddine-kebaily.netlify.app"
+
+
+def jsonld(lang: str) -> str:
+    """Données structurées schema.org (Person + WebSite) pour les moteurs de recherche."""
+    fr = lang == "fr"
+    data = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Person",
+                "@id": SITE + "/#person",
+                "name": "Chems Eddine Adel Kebaily",
+                "givenName": "Chems Eddine Adel",
+                "familyName": "Kebaily",
+                "jobTitle": "Étudiant en Master 1 Traitement du signal et des images" if fr else "Master's student in Signal and Image Processing",
+                "description": "Ingénierie IA : agents IA, IA générative et prompt engineering." if fr else "AI engineering: AI agents, generative AI and prompt engineering.",
+                "url": SITE + ("/" if fr else "/en/"),
+                "image": SITE + "/assets/photo.jpg",
+                "email": "mailto:chemseddine.keb@gmail.com",
+                "address": {"@type": "PostalAddress", "addressLocality": "Calais", "addressCountry": "FR"},
+                "affiliation": {"@type": "CollegeOrUniversity", "name": "Université du Littoral Côte d'Opale"},
+                "alumniOf": {"@type": "CollegeOrUniversity", "name": "Université M'Hamed Bougara de Boumerdès"},
+                "knowsAbout": ["AI agents", "Generative AI", "Prompt engineering", "Machine learning",
+                               "Computer vision", "Signal processing", "Python", "PyTorch"],
+                "knowsLanguage": ["ar", "fr", "en"],
+                "sameAs": ["https://www.linkedin.com/in/chemseddineadel-keb", "https://github.com/adkebaily"],
+            },
+            {
+                "@type": "WebSite",
+                "@id": SITE + "/#website",
+                "url": SITE + "/",
+                "name": "Chems Eddine Adel Kebaily",
+                "inLanguage": ["fr", "en"],
+                "author": {"@id": SITE + "/#person"},
+            },
+        ],
+    }
+    return json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
 
 FR = {
     "lang": "fr", "base": "", "cv_file": "CV_Kebaily.pdf",
+    "canonical": SITE + "/", "og_locale": "fr_FR", "og_image": "og-fr.jpg",
     "meta_title": "Chems Eddine Adel Kebaily — Traitement du signal et des images",
     "meta_desc": "Portfolio de Chems Eddine Adel Kebaily, étudiant en Master 1 Traitement du signal et des images à l'ULCO : machine learning, vision par ordinateur et développement logiciel.",
     "lang_label": "Langue",
     "lang_switch": '<span class="on">FR</span><a href="en/" hreflang="en" lang="en">EN</a>',
-    "theme_label": "Changer de thème", "top_label": "Revenir en haut",
+    "theme_label": "Changer de thème", "skip": "Aller au contenu", "top_label": "Revenir en haut",
     "nav_ai": "Assistant IA", "nav_approach": "Démarche", "nav_projects": "Projets",
     "nav_journey": "Parcours", "nav_skills": "Compétences", "nav_contact": "Me contacter",
 
@@ -57,7 +97,7 @@ FR = {
     "ap_cta": "Voir mes projets",
 
     "pr_pill": "Projets", "pr_title_a": "Mes", "pr_title_b": "projets",
-    "pr_sub": "Agents IA, apprentissage automatique et vision par ordinateur, de la donnée au résultat mesuré.",
+    "pr_sub": "Deux agents IA, un projet de recherche en machine learning et un projet de vision par ordinateur, de la donnée au résultat mesuré.",
     "mock3_ok": "validé", "mock3_review": "revue humaine", "mock3_missing": "manquant",
     "p3_title": "Agent IA de traitement de dossiers administratifs",
     "p3_ctx": "Projet personnel · IA dans le service public · 2026",
@@ -65,6 +105,11 @@ FR = {
     "p3_link": "Voir le code et les résultats", "p3_short": "Agent dossiers administratifs",
     "mock_legit": "légitime", "mock_phish": "phishing",
     "mock_patches": "Patchs 16×16", "mock_classes": "90 classes", "patches": PATCHES,
+    "p4_title": "CK-AI — l'agent IA de ce portfolio",
+    "p4_ctx": "Projet personnel · Agents IA · 2026",
+    "p4_desc": "Agent conversationnel bilingue basé sur l'API Claude : il consulte mon profil avec des outils, compare une offre de stage à mes compétences et agit sur la page (afficher un projet, proposer mon CV, préparer un message). Garde-fous contre l'injection de prompt, limites de fréquence, déploiement serverless sur Netlify.",
+    "p4_link": "L'essayer", "p4_short": "CK-AI (agent IA)",
+    "mock_ag_q": "Voici notre offre de stage en IA générative…", "mock_ag_a": "Bonne correspondance : Python, LLM, agents. À préciser : Kubernetes. J'ai préparé un message pour lui.",
     "p1_title": "Détection de phishing par apprentissage automatique",
     "p1_ctx": "Projet de fin d'études de Licence · Recherche · 2025",
     "p1_desc": "Étude et comparaison de plusieurs modèles de classification pour distinguer les sites et URL de phishing des sites légitimes, avec extraction de caractéristiques et rédaction d'un rapport de recherche.",
@@ -115,11 +160,12 @@ FR = {
 
 EN = {
     "lang": "en", "base": "../", "cv_file": "CV_Kebaily_EN.pdf",
+    "canonical": SITE + "/en/", "og_locale": "en_GB", "og_image": "og-en.jpg",
     "meta_title": "Chems Eddine Adel Kebaily — Signal and Image Processing",
     "meta_desc": "Portfolio of Chems Eddine Adel Kebaily, Master's student in Signal and Image Processing at ULCO: machine learning, computer vision and software development.",
     "lang_label": "Language",
     "lang_switch": '<a href="../" hreflang="fr" lang="fr">FR</a><span class="on">EN</span>',
-    "theme_label": "Toggle theme", "top_label": "Back to top",
+    "theme_label": "Toggle theme", "skip": "Skip to content", "top_label": "Back to top",
     "nav_ai": "AI assistant", "nav_approach": "Approach", "nav_projects": "Projects",
     "nav_journey": "Journey", "nav_skills": "Skills", "nav_contact": "Contact me",
 
@@ -157,7 +203,7 @@ EN = {
     "ap_cta": "See my projects",
 
     "pr_pill": "Projects", "pr_title_a": "My", "pr_title_b": "projects",
-    "pr_sub": "AI agents, machine learning and computer vision, from data to measured results.",
+    "pr_sub": "Two AI agents, a machine learning research project and a computer vision project, from data to measured results.",
     "mock3_ok": "validated", "mock3_review": "human review", "mock3_missing": "missing",
     "p3_title": "AI agent for administrative document processing",
     "p3_ctx": "Personal project · AI in public services · 2026",
@@ -165,6 +211,11 @@ EN = {
     "p3_link": "View the code and results", "p3_short": "Administrative document agent",
     "mock_legit": "legitimate", "mock_phish": "phishing",
     "mock_patches": "16×16 patches", "mock_classes": "90 classes", "patches": PATCHES,
+    "p4_title": "CK-AI — this portfolio's AI agent",
+    "p4_ctx": "Personal project · AI agents · 2026",
+    "p4_desc": "Bilingual conversational agent on the Claude API: it looks up my profile with tools, compares an internship offer with my skills and acts on the page (show a project, offer my CV, draft a message). Guardrails against prompt injection, rate limits, serverless deployment on Netlify.",
+    "p4_link": "Try it", "p4_short": "CK-AI (AI agent)",
+    "mock_ag_q": "Here is our generative AI internship offer…", "mock_ag_a": "Good match: Python, LLMs, agents. To clarify: Kubernetes. I've drafted a message to him.",
     "p1_title": "Phishing detection with machine learning",
     "p1_ctx": "Bachelor's final project · Research · 2025",
     "p1_desc": "Study and comparison of several classification models to tell phishing websites and URLs apart from legitimate ones, with feature extraction and a research report.",
@@ -219,7 +270,7 @@ JS = {
         "words": ["agents IA", "prompts", "solutions IA"],
         "steps_label": "Étapes de l'agent",
         "steps": {"get_profile_section": "🔎 Profil consulté", "check_offer_requirements": "📋 Offre comparée au profil", "show_section": "📍 Section affichée", "open_project": "🗂️ Projet ouvert", "offer_cv": "📄 CV proposé", "prefill_contact_form": "✉️ Message préparé"},
-        "details": {"education": "formation", "experience": "expériences", "projects": "projets", "skills": "compétences", "languages": "langues", "activities": "activités", "contact": "contact", "assistant": "assistant", "demarche": "démarche", "projets": "projets", "parcours": "parcours", "competences": "compétences", "phishing": "détection de phishing", "animals": "reconnaissance d'animaux", "fr": "français", "en": "anglais"},
+        "details": {"education": "formation", "experience": "expériences", "projects": "projets", "skills": "compétences", "languages": "langues", "activities": "activités", "contact": "contact", "assistant": "assistant", "demarche": "démarche", "projets": "projets", "parcours": "parcours", "competences": "compétences", "documents": "agent dossiers administratifs", "ckai": "CK-AI", "phishing": "détection de phishing", "animals": "reconnaissance d'animaux", "fr": "français", "en": "anglais"},
         "prefilled": "✍️ CK-AI a préparé un brouillon : vérifiez-le, modifiez-le si besoin, puis envoyez.",
         "cv_fr": "Télécharger le CV (français)", "cv_en": "Télécharger le CV (anglais)",
 
@@ -263,7 +314,7 @@ JS = {
         "words": ["AI agents", "prompts", "AI solutions"],
         "steps_label": "Agent steps",
         "steps": {"get_profile_section": "🔎 Profile checked", "check_offer_requirements": "📋 Offer compared to profile", "show_section": "📍 Section shown", "open_project": "🗂️ Project opened", "offer_cv": "📄 CV offered", "prefill_contact_form": "✉️ Message drafted"},
-        "details": {"education": "education", "experience": "experience", "projects": "projects", "skills": "skills", "languages": "languages", "activities": "activities", "contact": "contact", "assistant": "assistant", "demarche": "approach", "projets": "projects", "parcours": "journey", "competences": "skills", "phishing": "phishing detection", "animals": "animal recognition", "fr": "French", "en": "English"},
+        "details": {"education": "education", "experience": "experience", "projects": "projects", "skills": "skills", "languages": "languages", "activities": "activities", "contact": "contact", "assistant": "assistant", "demarche": "approach", "projets": "projects", "parcours": "journey", "competences": "skills", "documents": "administrative document agent", "ckai": "CK-AI", "phishing": "phishing detection", "animals": "animal recognition", "fr": "French", "en": "English"},
         "prefilled": "✍️ CK-AI drafted a message: review it, edit if needed, then send.",
         "cv_fr": "Download CV (French)", "cv_en": "Download CV (English)",
 
@@ -315,6 +366,7 @@ def asset_version() -> str:
 def render(texts: dict) -> str:
     values = dict(texts)
     values["version"] = asset_version()
+    values["jsonld"] = jsonld(texts["lang"])
     values["i18n_json"] = json.dumps(JS[texts["lang"]], ensure_ascii=False).replace("</", "<\\/")
     out = re.sub(r"\{\{(\w+)\}\}", lambda m: values[m.group(1)], TEMPLATE)
     leftover = re.findall(r"\{\{\w+\}\}", out)
@@ -333,6 +385,33 @@ def thanks_page(lang: str, base: str) -> str:
 """
 
 
+def seo_files(pub: Path) -> None:
+    """robots.txt, sitemap.xml (avec hreflang) et page 404 bilingue."""
+    from datetime import date
+    today = date.today().isoformat()
+    (pub / "robots.txt").write_text(
+        f"User-agent: *\nAllow: /\nDisallow: /merci.html\nDisallow: /en/merci.html\n\nSitemap: {SITE}/sitemap.xml\n",
+        encoding="utf-8")
+    alts = (f'    <xhtml:link rel="alternate" hreflang="fr" href="{SITE}/"/>\n'
+            f'    <xhtml:link rel="alternate" hreflang="en" href="{SITE}/en/"/>\n'
+            f'    <xhtml:link rel="alternate" hreflang="x-default" href="{SITE}/"/>\n')
+    urls = "".join(f"  <url>\n    <loc>{SITE}{path}</loc>\n    <lastmod>{today}</lastmod>\n{alts}  </url>\n"
+                   for path in ("/", "/en/"))
+    (pub / "sitemap.xml").write_text(
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
+        + urls + "</urlset>\n", encoding="utf-8")
+    (pub / "404.html").write_text(f"""<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page introuvable — Chems Eddine Adel Kebaily</title><meta name="robots" content="noindex">
+<link rel="stylesheet" href="/assets/styles.css?v={asset_version()}"></head>
+<body class="thanks"><main class="thanks-box"><span class="brand-mark">CK</span>
+<h1>404</h1><p>Cette page n'existe pas.<br><span lang="en">This page doesn't exist.</span></p>
+<p><a class="btn btn-primary" href="/">Accueil (FR)</a> <a class="btn btn-outline" href="/en/" lang="en">Home (EN)</a></p>
+</main></body></html>
+""", encoding="utf-8")
+
+
 def main() -> None:
     assert FR.keys() == EN.keys(), set(FR) ^ set(EN)
     pub = ROOT / "public"
@@ -341,7 +420,8 @@ def main() -> None:
     (pub / "en" / "index.html").write_text(render(EN), encoding="utf-8")
     (pub / "merci.html").write_text(thanks_page("fr", ""), encoding="utf-8")
     (pub / "en" / "merci.html").write_text(thanks_page("en", "../"), encoding="utf-8")
-    print("built public/index.html, public/en/index.html and thank-you pages")
+    seo_files(pub)
+    print("built public/index.html, public/en/index.html, thank-you pages, 404, robots.txt and sitemap.xml")
 
 
 if __name__ == "__main__":

@@ -8,7 +8,21 @@
   <meta property="og:title" content="{{meta_title}}">
   <meta property="og:description" content="{{meta_desc}}">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://chemseddine-kebaily.netlify.app/assets/photo.jpg">
+  <link rel="canonical" href="{{canonical}}">
+  <meta property="og:url" content="{{canonical}}">
+  <meta property="og:locale" content="{{og_locale}}">
+  <meta property="og:site_name" content="Chems Eddine Adel Kebaily">
+  <meta property="og:image" content="https://chemseddine-kebaily.netlify.app/assets/{{og_image}}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{{meta_title}}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{meta_title}}">
+  <meta name="twitter:description" content="{{meta_desc}}">
+  <meta name="twitter:image" content="https://chemseddine-kebaily.netlify.app/assets/{{og_image}}">
+  <meta name="author" content="Chems Eddine Adel Kebaily">
+  <link rel="alternate" hreflang="x-default" href="https://chemseddine-kebaily.netlify.app/">
+  <script type="application/ld+json">{{jsonld}}</script>
   <link rel="alternate" hreflang="fr" href="https://chemseddine-kebaily.netlify.app/">
   <link rel="alternate" hreflang="en" href="https://chemseddine-kebaily.netlify.app/en/">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%234f46e5'/><text x='50' y='66' font-size='44' font-family='Arial' font-weight='700' fill='white' text-anchor='middle'>CK</text></svg>">
@@ -19,6 +33,7 @@
 </head>
 <body data-lang="{{lang}}">
 
+<a class="skip" href="#assistant">{{skip}}</a>
 <div class="progress" id="progress"></div>
 
 <!-- ===================== NAV ===================== -->
@@ -48,7 +63,7 @@
   </div>
 </header>
 
-<main id="top">
+<main id="top" tabindex="-1">
 
   <!-- ===================== HERO ===================== -->
   <section class="hero">
@@ -91,7 +106,7 @@
         </ul>
         <div class="stat-card">
           <div><strong data-count="2">2</strong><span>{{stat_internships}}</span></div>
-          <div><strong data-count="3">3</strong><span>{{stat_projects}}</span></div>
+          <div><strong data-count="4">4</strong><span>{{stat_projects}}</span></div>
           <div><strong data-count="3">3</strong><span>{{stat_languages}}</span></div>
         </div>
       </div>
@@ -187,6 +202,15 @@
               <div class="models"><span>OpenCV</span><span>OCR</span><span>LLM</span><span>n8n</span><span>97,6 %</span></div>
             </div>
           </div>
+          <div class="screen" data-project="3" hidden>
+            <div class="screen-bar"><i></i><i></i><i></i><span>ck-ai · agent</span></div>
+            <div class="mock mock-agent">
+              <div class="ag-msg user">{{mock_ag_q}}</div>
+              <ul class="ag-steps"><li>get_profile_section</li><li>check_offer_requirements</li><li>prefill_contact_form</li></ul>
+              <div class="ag-msg bot">{{mock_ag_a}}</div>
+              <div class="models"><span>Claude API</span><span>Tool use</span><span>Netlify Functions</span></div>
+            </div>
+          </div>
           <div class="screen" data-project="0" hidden>
             <div class="screen-bar"><i></i><i></i><i></i><span>phishing-detector.ipynb</span></div>
             <div class="mock mock-phish">
@@ -213,6 +237,13 @@
             <div class="tags"><span>Python</span><span>OpenCV</span><span>Tesseract</span><span>FastAPI</span><span>LLM (Claude)</span><span>n8n</span><span>Docker</span></div>
             <a class="link" href="https://github.com/adkebaily/agent-dossiers-administratifs" target="_blank" rel="noopener">{{p3_link}} <span aria-hidden="true">→</span></a>
           </article>
+          <article class="project" data-project="3" hidden>
+            <h3>{{p4_title}}</h3>
+            <p class="ctx">{{p4_ctx}}</p>
+            <p>{{p4_desc}}</p>
+            <div class="tags"><span>Claude API</span><span>{{t_agents}}</span><span>Tool use</span><span>Prompt engineering</span><span>Node.js</span><span>Netlify</span></div>
+            <a class="link" href="#assistant">{{p4_link}} <span aria-hidden="true">→</span></a>
+          </article>
           <article class="project" data-project="0" hidden>
             <h3>{{p1_title}}</h3>
             <p class="ctx">{{p1_ctx}}</p>
@@ -231,6 +262,7 @@
       </div>
       <div class="tabs reveal" role="tablist">
         <button type="button" role="tab" class="on" aria-selected="true" data-tab="2">{{p3_short}}</button>
+        <button type="button" role="tab" aria-selected="false" data-tab="3">{{p4_short}}</button>
         <button type="button" role="tab" aria-selected="false" data-tab="0">{{p1_short}}</button>
         <button type="button" role="tab" aria-selected="false" data-tab="1">{{p2_short}}</button>
       </div>

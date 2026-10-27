@@ -140,7 +140,7 @@
     flash(el.querySelector(".section-head") || el);
   };
   const openProject = name => {
-    const tab = document.querySelector(`.tabs button[data-tab="${name === "animals" ? 1 : 0}"]`);
+    const tab = document.querySelector(`.tabs button[data-tab="${({ documents: 2, ckai: 3, phishing: 0, animals: 1 })[name] ?? 0}"]`);
     if (tab) tab.click();
     showSection("projets");
   };

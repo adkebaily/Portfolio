@@ -82,7 +82,7 @@ const TOOLS = [
     strict: true,
     input_schema: {
       type: "object",
-      properties: { project: { type: "string", enum: ["phishing", "animals"] } },
+      properties: { project: { type: "string", enum: ["documents", "ckai", "phishing", "animals"] } },
       required: ["project"],
       additionalProperties: false,
     },
@@ -148,7 +148,7 @@ function runTool(name, input, actions) {
       if (!SECTION_IDS.includes(input.section)) return { error: true, text: "Unknown section" };
       action.section = input.section;
     } else if (name === "open_project") {
-      if (!["phishing", "animals"].includes(input.project)) return { error: true, text: "Unknown project" };
+      if (!["documents", "ckai", "phishing", "animals"].includes(input.project)) return { error: true, text: "Unknown project" };
       action.project = input.project;
     } else if (name === "offer_cv") {
       action.language = input.language === "en" ? "en" : "fr";
