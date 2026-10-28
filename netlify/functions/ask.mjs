@@ -24,7 +24,7 @@ const RATE_WINDOW_MS = 10 * 60 * 1000; // …toutes les 10 minutes
 
 const ALLOWED_HOSTS = [/^chemseddine-kebaily\.netlify\.app$/, /--chemseddine-kebaily\.netlify\.app$/, /^localhost(:\d+)?$/, /^127\.0\.0\.1(:\d+)?$/];
 
-const SECTION_IDS = ["assistant", "demarche", "projets", "parcours", "competences", "contact"];
+const SECTION_IDS = ["assistant", "projets", "parcours", "competences", "contact"];
 
 const SYSTEM = `You are CK-AI, the agent on the personal portfolio website of Chems Eddine Adel Kebaily.
 Visitors are mostly recruiters, companies offering internships, and teachers. You answer their questions and can act on the page for them.

@@ -88,14 +88,6 @@
     }, 2600);
   }
 
-  // ---------- Onglets des projets ----------
-  const tabs = document.querySelectorAll(".tabs button");
-  tabs.forEach(tab => tab.addEventListener("click", () => {
-    const id = tab.dataset.tab;
-    tabs.forEach(t => { t.classList.toggle("on", t === tab); t.setAttribute("aria-selected", t === tab); });
-    document.querySelectorAll("[data-project]").forEach(el => { el.hidden = el.dataset.project !== id; });
-  }));
-
   // ---------- Assistant CK-AI ----------
   const contact = $("#contactForm"), formStatus = $("#formStatus");
   const body = $("#chatBody"), form = $("#chatForm"), input = $("#chatInput");
@@ -140,9 +132,10 @@
     flash(el.querySelector(".section-head") || el);
   };
   const openProject = name => {
-    const tab = document.querySelector(`.tabs button[data-tab="${({ documents: 2, ckai: 3, phishing: 0, animals: 1 })[name] ?? 0}"]`);
-    if (tab) tab.click();
-    showSection("projets");
+    const el = document.getElementById("p-" + name);
+    if (!el) return showSection("projets");
+    el.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
+    flash(el);
   };
   const prefillContact = a => {
     contact.elements.objet.value = a.subject || "";
@@ -278,10 +271,6 @@
     }
     btn.disabled = false;
   });
-
-  // ---------- Bandeau défilant : contenu doublé pour une boucle continue ----------
-  const track = $(".marquee-track");
-  track.innerHTML += track.innerHTML;
 
   $("#year").textContent = new Date().getFullYear();
 })();
