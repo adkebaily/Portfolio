@@ -71,7 +71,7 @@ FR = {
     "hero_audience": 'Vous êtes <button type="button" class="aud c1" data-aud="recruiter">recruteur</button> ou <button type="button" class="aud c2" data-aud="teacher">enseignant</button> ?',
     "hero_cta_ai": "Demander à CK-AI", "or": "ou", "hero_cta_cv": "Télécharger mon CV",
     "chip_tsi": "Agents IA",
-    "stat_fields": "précision d'extraction", "stat_ocr": "moins d'erreurs OCR", "stat_tools": "stages en entreprise", "stat_link": "Voir le projet d'agent de dossiers administratifs",
+    "stat_internships": "stages", "stat_projects": "projets IA", "stat_languages": "langues",
 
     "ai_pill": "Assistant IA", "ai_title_a": "Une question ? Demandez à",
     "ai_sub": "CK-AI est un agent IA : il consulte mon profil, compare une offre de stage à mes compétences et agit sur la page pour vous (afficher un projet, proposer mon CV, préparer un message).",
@@ -177,7 +177,7 @@ EN = {
     "hero_audience": 'Are you a <button type="button" class="aud c1" data-aud="recruiter">recruiter</button> or a <button type="button" class="aud c2" data-aud="teacher">teacher</button>?',
     "hero_cta_ai": "Ask CK-AI", "or": "or", "hero_cta_cv": "Download my CV",
     "chip_tsi": "AI Agents",
-    "stat_fields": "extraction accuracy", "stat_ocr": "fewer OCR errors", "stat_tools": "industry internships", "stat_link": "See the administrative document agent project",
+    "stat_internships": "internships", "stat_projects": "AI projects", "stat_languages": "languages",
 
     "ai_pill": "AI assistant", "ai_title_a": "Have a question? Ask",
     "ai_sub": "CK-AI is an AI agent: it looks up my profile, compares an internship offer with my skills and acts on the page for you (show a project, offer my CV, draft a message).",
