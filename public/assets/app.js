@@ -272,5 +272,8 @@
     btn.disabled = false;
   });
 
+  // Vidéos de démo : pas de lecture automatique si l'utilisateur limite les animations
+  if (reduceMotion) document.querySelectorAll("video[autoplay]").forEach(v => { v.removeAttribute("autoplay"); v.pause(); v.controls = true; });
+
   $("#year").textContent = new Date().getFullYear();
 })();

@@ -95,6 +95,7 @@ FR = {
     "ap5_t": "Évaluation & garde-fous", "ap5_d": "97,6 % de champs exacts sur 40 documents ; les cas incertains passent en validation humaine.",
     "ap6_t": "Intégration", "ap6_d": "API FastAPI et Docker pour l'agent, Netlify Functions pour CK-AI.",
     "ap_cta": "Voir mes projets",
+    "p3_video": "Démonstration : une pièce floue est nettoyée, lue par OCR, ses champs extraits, puis le dossier est vérifié.",
 
     "pr_pill": "Projets", "pr_title_a": "Mes", "pr_title_b": "projets",
     "pr_sub": "Deux agents IA, un projet de recherche en machine learning et un projet de vision par ordinateur, de la donnée au résultat mesuré.",
@@ -201,6 +202,7 @@ EN = {
     "ap5_t": "Evaluation & guardrails", "ap5_d": "97.6% exact fields on 40 documents; uncertain cases go to human review.",
     "ap6_t": "Integration", "ap6_d": "FastAPI and Docker for the agent, Netlify Functions for CK-AI.",
     "ap_cta": "See my projects",
+    "p3_video": "Demo: a blurry document is cleaned, read by OCR, its fields extracted, then the file is checked.",
 
     "pr_pill": "Projects", "pr_title_a": "My", "pr_title_b": "projects",
     "pr_sub": "Two AI agents, a machine learning research project and a computer vision project, from data to measured results.",
