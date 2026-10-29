@@ -266,8 +266,13 @@
       formStatus.classList.add("ok");
       formStatus.textContent = T.sent;
     } catch (err) {
+      // Repli : le même message, prêt à partir depuis la messagerie du visiteur
+      const d = new FormData(contact);
+      const who = [d.get("nom"), d.get("organisation")].filter(Boolean).join(", ");
+      const href = "mailto:chemseddine.keb@gmail.com?subject=" + encodeURIComponent(d.get("objet") || "Portfolio") +
+        "&body=" + encodeURIComponent(`${d.get("message") || ""}\n\n${who}\n${d.get("email") || ""}`);
       formStatus.classList.add("err");
-      formStatus.textContent = T.send_error;
+      formStatus.innerHTML = `${escapeHtml(T.send_error)} <a href="${escapeHtml(href)}">${escapeHtml(T.send_mail)}</a>`;
     }
     btn.disabled = false;
   });

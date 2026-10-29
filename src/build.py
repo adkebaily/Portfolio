@@ -291,7 +291,7 @@ JS = {
         "offer_label": "📎 Offre collée", "chars": "caractères",
         "offer_demo": "L'analyse d'offre utilise l'IA, qui n'est pas encore activée sur ce site. En attendant, voici l'essentiel : Chems Eddine Adel est étudiant en **Master 1 Traitement du signal et des images (ULCO)**, avec des projets en **machine learning** (scikit-learn) et **vision par ordinateur** (PyTorch, Vision Transformer), et deux stages en **développement web et mobile** (Spring Boot, React, Flutter). Pour un avis précis, contactez-le : chemseddine.keb@gmail.com.",
         "sent": "Merci ! Votre message a bien été envoyé. Je vous réponds rapidement.",
-        "send_error": "L'envoi a échoué. Écrivez-moi directement à chemseddine.keb@gmail.com.",
+        "send_error": "L'envoi automatique n'a pas fonctionné.", "send_mail": "Envoyer ce message depuis ma messagerie",
         "faq": [
             [["offer him", "hire", "recruit", "propose"],
              "Happy to help! I've drafted a message in the contact form: add the details of your offer, then send it.",
@@ -343,7 +343,7 @@ JS = {
         "offer_label": "📎 Offer pasted", "chars": "characters",
         "offer_demo": "Offer analysis uses AI, which isn't enabled on this site yet. In short: Chems Eddine Adel is a **Master's student in Signal and Image Processing (ULCO)**, with projects in **machine learning** (scikit-learn) and **computer vision** (PyTorch, Vision Transformer), and two internships in **web and mobile development** (Spring Boot, React, Flutter). For a precise answer, contact him: chemseddine.keb@gmail.com.",
         "sent": "Thank you! Your message has been sent. I'll get back to you soon.",
-        "send_error": "Sending failed. Please email me directly at chemseddine.keb@gmail.com.",
+        "send_error": "Automatic sending did not work.", "send_mail": "Send this message from my email app",
         "faq": [
             [["background", "education", "master", "study", "studies", "degree", "bachelor", "ulco", "university"],
              "Chems Eddine Adel is a **Master's (M1) student in Signal and Image Processing** at the Université du Littoral Côte d'Opale (ULCO, 2026–2027). Before that, he earned a **Bachelor's degree in Computer Systems** from the University of Boumerdès (2022–2025) and a Baccalaureate in Technical Mathematics (with honours, 2022).", [{"type": "show_section", "section": "parcours"}]],
@@ -376,7 +376,7 @@ THANKS = {
 
 def asset_version() -> str:
     h = hashlib.sha1()
-    for name in ("styles.css", "app.js"):
+    for name in ("styles.css", "app.js", "photo.jpg"):  # la photo aussi, pour que le navigateur prenne la nouvelle
         h.update((ROOT / "public" / "assets" / name).read_bytes())
     return h.hexdigest()[:10]
 
