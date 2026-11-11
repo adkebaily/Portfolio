@@ -48,7 +48,7 @@
 
 % ===================== PROFILE =====================
 \section{Profile}
-\textbf{Master's student in Signal and Image Processing} at the Université du Littoral Côte d'Opale, moving into \textbf{AI engineering}: \textbf{AI agents}, \textbf{generative AI} and \textbf{prompt engineering}. Built an \textbf{AI agent for administrative document processing} (OCR, LLM, n8n), CK-AI, my portfolio's AI agent, and classification projects (phishing, \textbf{Vision Transformer}). Two internships at \textbf{Ooredoo Algeria} in web (Spring Boot, React, SQL/Oracle) and mobile (Flutter) development, following Agile practices. \textbf{Internship from 1 April 2027 (up to 5 months)}: AI agents, generative AI, ML/DL, vision, NLP.
+\textbf{Master's student in Signal and Image Processing} at the Université du Littoral Côte d'Opale, moving into \textbf{AI engineering}: \textbf{AI agents}, \textbf{generative AI} and \textbf{prompt engineering}. Built three \textbf{AI agents} (administrative documents, CK-AI, a Telegram-to-Notion bot) with \textbf{LLMs}, OCR and n8n. Two internships at \textbf{Ooredoo Algeria} in web (Spring Boot, React, SQL/Oracle) and mobile (Flutter) development, following Agile practices. \textbf{Internship from 1 April 2027 (up to 5 months)}: AI agents, generative AI, ML/DL, vision, NLP.
 
 % ===================== EDUCATION =====================
 \section{Education}
@@ -80,24 +80,23 @@
 \end{joblong}
 
 \begin{joblong}{CK-AI — AI agent on my portfolio (Claude API, tool use)}{2026}
-\item Bilingual agent built with the \textbf{Claude API} and \textbf{tool use}: \textbf{6 tools} (profile lookup, matching an internship offer to my skills, 4 actions on the page), up to 5 steps per question.
-\item \textbf{Guardrails} (size and rate limits, prompt-injection protection) and \textbf{serverless} deployment on Netlify. \href{https://chemseddine-kebaily.netlify.app/en/}{\faGlobe\ Demo}
+\item Bilingual agent on the \textbf{Claude API} with \textbf{tool use} (\textbf{6 tools}: profile lookup, offer matching, 4 page actions), \textbf{guardrails} against prompt injection and abuse, \textbf{serverless} on Netlify. \href{https://chemseddine-kebaily.netlify.app/en/}{\faGlobe\ Demo}
+\end{joblong}
+
+\begin{joblong}{DMS — Telegram bot that files my course notes in Notion (n8n, OpenCV, Gemini)}{2026}
+\item Photos of my notes become searchable PDFs in Notion: \textbf{n8n} workflow with an \textbf{LLM} (Gemini) that files each batch in the right module, \textbf{FastAPI} worker for \textbf{OpenCV} scanning, \textbf{OCR} and compression; Gemini Vision turns \textbf{12/12} handwritten pages upright (Tesseract: 0/12). \href{https://github.com/adkebaily/telegram-notion-dms}{\faGithub\ Code}
 \end{joblong}
 
 \begin{joblong}{Phishing Detection with Machine Learning — Bachelor's Final Project (research)}{2025}
 \item Comparison of \textbf{16 classification models} (\textbf{XGBoost}, LightGBM, random forest, neural networks…) on 100,077 URLs with \textbf{Python} and \textbf{scikit-learn}; best: XGBoost, \textbf{89.6\%} accuracy, +10.6 points over hand-written rules. \href{https://drive.google.com/file/d/1_rFw27PhBd6QnFyeZe5N6PHuoE_wE1JD/view}{\faFilePdf\ Report}
 \end{joblong}
 
-\begin{joblong}{Animal Recognition (90 species) — Computer Vision}{}
-\item Multi-class image classification with a pre-trained \textbf{Vision Transformer (ViT)} and \textbf{transfer learning} in \textbf{PyTorch} (Hugging Face), GPU training on Kaggle. \href{https://github.com/adkebaily/Animal-Recognition}{\faGithub\ Code}
-\end{joblong}
-
 % ===================== SKILLS =====================
 \section{Skills}
 \begin{tabularx}{\linewidth}{@{}>{\bfseries}p{0.25\linewidth} X@{}}
-Generative AI \& agents & AI agents, prompt engineering, Claude API, structured outputs, n8n, FastAPI \\
+Generative AI \& agents & AI agents, prompt engineering, Claude and Gemini APIs, structured outputs, n8n, FastAPI \\
 Image processing & OpenCV, OCR (Tesseract), denoising, binarisation, evaluation (CER, F1) \\
-Machine learning \& vision & PyTorch, TensorFlow, scikit-learn, Vision Transformer, transfer learning, Kaggle, Google Colab \\
+Machine learning \& vision & PyTorch, TensorFlow, scikit-learn, Vision Transformer, transfer learning, Kaggle, Colab \\
 Programming & Python, C, C++, Java, JavaScript, PHP, SQL (Oracle), HTML/CSS \\
 Development & Spring Boot, React, Node.js, Flutter, REST APIs \\
 Tools \& methods & Docker, PostgreSQL, Git/GitHub, Linux (Ubuntu), Windows Server, VS Code; Agile, code reviews, unit testing \\
