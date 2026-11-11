@@ -1,0 +1,158 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&family=Caveat:wght@500&display=block" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1120px; height: 630px; overflow: hidden; background: #0b0f1a; font-family: Inter, sans-serif; color: #e5e7eb; }
+  body { background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px); background-size: 32px 32px; }
+  .scene { position: absolute; inset: 0; padding: 64px 72px; opacity: 0; }
+  .kicker { color: #22d3ee; font-weight: 600; font-size: 17px; margin-bottom: 22px; }
+  h1 { font-size: 50px; font-weight: 800; line-height: 1.08; letter-spacing: -.02em; max-width: 640px; }
+  .grad { background: linear-gradient(90deg, #818cf8, #22d3ee); -webkit-background-clip: text; color: transparent; }
+  .lead { margin-top: 22px; font-size: 21px; color: #9ca3af; max-width: 560px; line-height: 1.45; }
+  .foot { position: absolute; left: 72px; bottom: 30px; font-size: 13px; color: #6b7280; }
+  .card { background: #111827; border: 1px solid #1f2937; border-radius: 14px; padding: 18px 20px; }
+  .bubble { position: absolute; padding: 14px 18px; border-radius: 18px; font-size: 20px; }
+  .me { background: #4f46e5; color: #fff; border-bottom-right-radius: 6px; }
+  .bot { background: #1f2937; border: 1px solid #374151; border-bottom-left-radius: 6px; line-height: 1.5; }
+  .mono { font-family: "JetBrains Mono", monospace; }
+  .row { display: flex; gap: 10px; margin-top: 10px; }
+  .btn { padding: 8px 14px; border-radius: 10px; border: 1px solid #4f46e5; color: #c7d2fe; font-size: 16px; }
+  .label { font-size: 15px; color: #9ca3af; margin-top: 10px; }
+  .sheet { position: absolute; width: 300px; height: 390px; background: #fbfaf6; padding: 26px 24px; font-family: Caveat, cursive; font-size: 25px; color: #1e3a8a; line-height: 1.35; }
+  .sheet p:first-child { color: #b91c1c; font-size: 29px; }
+  .chip { display: inline-block; padding: 10px 16px; border-radius: 10px; border: 1px solid #374151; font-size: 18px; color: #9ca3af; margin-right: 10px; }
+  .chip.on { border-color: #22d3ee; color: #e5e7eb; background: rgba(34,211,238,.08); }
+  .big { font-size: 34px; font-weight: 800; }
+  .stat { font-size: 22px; font-weight: 700; }
+  .stat b { color: #22d3ee; }
+</style></head>
+<body>
+<!-- 1. title -->
+<div class="scene" id="s1" style="padding-top:170px">
+  <div class="kicker" data-t="k1"></div>
+  <h1 data-t="h1"></h1>
+  <p class="lead" data-t="lead1"></p>
+  <div class="foot">Chems Eddine Adel Kebaily</div>
+</div>
+
+<!-- 2. send, then file -->
+<div class="scene" id="s2">
+  <div class="kicker" data-t="k2"></div>
+  <div class="bubble me" id="b-me" style="right:120px; top:120px">📷 ×4 · <span class="mono">proba td3</span></div>
+  <div class="card" id="gem" style="position:absolute; left:72px; top:210px; width:470px">
+    <div style="color:#22d3ee; font-weight:600; font-size:15px">Gemini</div>
+    <div style="font-size:20px; margin-top:8px; line-height:1.6"><span data-t="mod"></span> <b>Probabilités</b><br>Type: <b>TD</b><br><span style="color:#34d399" data-t="match"></span></div>
+  </div>
+  <div class="card" id="ask" style="position:absolute; left:590px; top:250px; width:460px">
+    <div style="font-size:17px; color:#9ca3af" data-t="unsure"></div>
+    <div class="row"><span class="btn">📂 Probabilités</span><span class="btn">🆕 Probas</span></div>
+  </div>
+  <div class="foot">Chems Eddine Adel Kebaily</div>
+</div>
+
+<!-- 3. scan -->
+<div class="scene" id="s3">
+  <div class="kicker" data-t="k3"></div>
+  <div id="photo" style="position:absolute; left:72px; top:110px; width:420px; height:360px; border-radius:14px; overflow:hidden; background: radial-gradient(circle at 30% 30%, #8b7355, #4a3b2a)">
+    <div class="sheet" id="sheet-raw" style="left:60px; top:-15px; transform: rotate(84deg) skew(-7deg, 3deg) scale(.78); box-shadow: 0 10px 30px rgba(0,0,0,.5); background: linear-gradient(115deg, #d9d4c7 0%, #f3f0e8 45%, #b9b2a3 100%)">
+      <p>Exercice 3</p><p>Soit X ~ N(0, 1)</p><p>P(X ≤ 1,96) ≈ 0,975</p><p>E[X²] = Var(X) + E[X]²</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 1</p>
+    </div>
+  </div>
+  <div class="label" style="position:absolute; left:72px; top:482px" data-t="raw"></div>
+  <div id="arrow" style="position:absolute; left:520px; top:265px; font-size:34px; color:#818cf8">→</div>
+  <div id="clean" style="position:absolute; left:600px; top:110px; width:280px; height:360px">
+    <div class="sheet" style="left:0; top:0; width:280px; height:360px; background:#fff; box-shadow: 0 6px 24px rgba(0,0,0,.35)">
+      <p>Exercice 3</p><p>Soit X ~ N(0, 1)</p><p>P(X ≤ 1,96) ≈ 0,975</p><p>E[X²] = Var(X) + E[X]²</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= 1</p>
+    </div>
+  </div>
+  <div class="label" style="position:absolute; left:600px; top:482px; width:470px" id="clean-l" data-t="cleanl"></div>
+  <div class="stat" id="orient" style="position:absolute; left:72px; top:540px"></div>
+  <div class="foot">Chems Eddine Adel Kebaily</div>
+</div>
+
+<!-- 4. pdf into notion -->
+<div class="scene" id="s4">
+  <div class="kicker" data-t="k4"></div>
+  <div style="margin-top:6px"><span class="chip" id="c1" data-t="c1"></span><span class="chip" id="c2" data-t="c2"></span><span class="chip" id="c3" data-t="c3"></span></div>
+  <div class="card" id="notion" style="position:absolute; left:72px; top:230px; width:640px; background:#f8fafc; color:#111827; border-color:#e5e7eb">
+    <div style="font-size:30px; font-weight:800">📄 Probabilités</div>
+    <div style="display:grid; grid-template-columns: 150px 1fr; gap:8px 0; margin-top:14px; font-size:17px">
+      <span style="color:#6b7280">Type</span><span>TD</span>
+      <span style="color:#6b7280" data-t="merged"></span><span>Probabilites_TD.pdf</span>
+      <span style="color:#6b7280">Pages</span><span>18</span>
+      <span style="color:#6b7280" data-t="log"></span><span data-t="logv"></span>
+    </div>
+  </div>
+  <div class="foot">Chems Eddine Adel Kebaily</div>
+</div>
+
+<!-- 5. results -->
+<div class="scene" id="s5">
+  <div class="kicker" data-t="k5"></div>
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; max-width:900px">
+    <div class="card r"><div class="big">12/12</div><div class="label" data-t="r1"></div></div>
+    <div class="card r"><div class="big">&lt; 5 MB</div><div class="label" data-t="r2"></div></div>
+    <div class="card r"><div class="big">&gt; 20 MB</div><div class="label" data-t="r3"></div></div>
+    <div class="card r"><div class="big">n8n + FastAPI</div><div class="label" data-t="r4"></div></div>
+  </div>
+  <div class="foot">Chems Eddine Adel Kebaily</div>
+</div>
+
+<script>
+const T = {
+ en: {
+  k1: "AI automation, personal project 2026",
+  h1: 'Course notes, <span class="grad">filed by a bot</span>',
+  lead1: "Photos of handwritten notes sent on Telegram become clean, searchable PDFs in Notion.",
+  k2: "Step 1: send, then file", mod: "Module:", match: "✓ matches an existing module",
+  unsure: "New or unsure module? The bot asks instead of guessing.",
+  k3: "Step 2: scan the photo", raw: "Photo as sent", cleanl: "Sheet found, flattened, turned upright, paper whitened",
+  orient: "Turning handwritten pages upright: Gemini <b>12/12</b>, Tesseract 0/12",
+  k4: "Step 3: PDF into Notion", c1: "OCR (French + English)", c2: "Compressed under 5 MB", c3: "Merged into the module",
+  merged: "Merged PDF", log: "Upload log", logv: "+4 pages · 4 photos cropped",
+  k5: "What it handles", r1: "handwritten pages turned upright", r2: "Notion upload limit, split if needed",
+  r3: "Telegram files, over MTProto", r4: "file bytes stay out of n8n · 10 tests",
+ },
+ fr: {
+  k1: "Automatisation IA, projet personnel 2026",
+  h1: 'Mes cours, <span class="grad">rangés par un bot</span>',
+  lead1: "Les photos de mes notes envoyées sur Telegram deviennent des PDF propres et consultables dans Notion.",
+  k2: "Étape 1 : envoyer, puis classer", mod: "Module :", match: "✓ module existant reconnu",
+  unsure: "Module nouveau ou douteux ? Le bot pose la question au lieu de deviner.",
+  k3: "Étape 2 : numériser la photo", raw: "Photo envoyée", cleanl: "Feuille détectée, redressée, remise à l'endroit, papier blanchi",
+  orient: "Remettre les pages manuscrites à l'endroit : Gemini <b>12/12</b>, Tesseract 0/12",
+  k4: "Étape 3 : le PDF dans Notion", c1: "OCR (français + anglais)", c2: "Compressé sous 5 Mo", c3: "Fusionné au module",
+  merged: "PDF fusionné", log: "Journal", logv: "+4 pages · 4 photos recadrées",
+  k5: "Ce qu'il gère", r1: "pages manuscrites remises à l'endroit", r2: "limite d'envoi Notion, découpage si besoin",
+  r3: "fichiers Telegram, via MTProto", r4: "les fichiers ne passent pas par n8n · 10 tests",
+ },
+};
+const lang = new URLSearchParams(location.search).get("lang") || "en";
+document.querySelectorAll("[data-t]").forEach(e => e.innerHTML = T[lang][e.dataset.t]);
+document.getElementById("orient").innerHTML = T[lang].orient;
+
+const clamp = x => Math.max(0, Math.min(1, x));
+const ease = x => { x = clamp(x); return x < .5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2; };
+const ramp = (t, a, d = .5) => ease((t - a) / d);          // 0 -> 1 starting at a
+const show = (el, v, dy = 14) => { el.style.opacity = v; el.style.transform = `translateY(${(1 - v) * dy}px)`; };
+const $ = id => document.getElementById(id);
+const S = [["s1", 0, 4.5], ["s2", 4.5, 10], ["s3", 10, 16], ["s4", 16, 20.5], ["s5", 20.5, 24]];
+
+window.seek = t => {
+  for (const [id, a, b] of S) $(id).style.opacity = Math.min(ramp(t, a, .4), 1 - ramp(t, b - .4, .4));
+  show(document.querySelector("#s1 h1"), ramp(t, .2, .6));
+  show(document.querySelector("#s1 .lead"), ramp(t, .8, .6));
+  show($("b-me"), ramp(t, 5.0));
+  show($("gem"), ramp(t, 6.2));
+  show($("ask"), ramp(t, 7.8));
+  $("clean").style.opacity = ramp(t, 11.4, .7); $("clean-l").style.opacity = ramp(t, 11.6, .6);
+  $("arrow").style.opacity = ramp(t, 11, .4);
+  show($("orient"), ramp(t, 13));
+  for (const [i, a] of [[1, 16.6], [2, 17.3], [3, 18]]) $("c" + i).classList.toggle("on", t >= a);
+  show($("notion"), ramp(t, 18.6));
+  document.querySelectorAll(".r").forEach((e, i) => show(e, ramp(t, 21 + i * .35)));
+};
+seek(0);
+</script>
+</body></html>

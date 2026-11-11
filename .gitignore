@@ -6,3 +6,4 @@ node_modules/
 cv/private.tex
 cv/out/
 __pycache__/
+video/*/frames_*/
